@@ -1,6 +1,5 @@
 import React from 'react'
-import { FaArrowAltCircleRight, FaEject } from 'react-icons/fa'
-import { HiArrowRight, HiLogin, HiLogout } from 'react-icons/hi'
+import { HiLogin } from 'react-icons/hi'
 import NavBar1 from '../../components/NavBar1'
 
 const LoginPage = () => {

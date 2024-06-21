@@ -24,8 +24,8 @@ const SideBar = () => {
     return (
         <div>
             <div className=''>
-                <aside className="flex  flex-col absolute items-start  min-h-screen px-4 py-2 w-60  mt-40">
-                    <ul className="flex-col space-y-2 backdrop-blur-sm bg-white/10  shadow-lg hover:shadow-orange-400 rounded-lg p-6">
+                <aside className="flex  flex-col items-start  min-h-screen px-4 py-2 w-36  mt-40">
+                    <ul className="flex-col space-y-2 backdrop-blur-sm bg-orange-400/10 shadow-lg hover:shadow-orange-400 rounded-lg p-6">
                         <Link href='/home'>
                             <li className="p-6 text-2xl hover:scale-150 ">
                                 <FaHome /></li>
@@ -52,7 +52,7 @@ const SideBar = () => {
                                 <FaPhoneAlt /></li>
                         </Link>
 
-                        <Link href="./aboutUs">
+                        <Link href="./sideBar/aboutUs">
                             <li className="p-6 text-2xl hover:scale-150">
                                 <FaInfo /></li>
                         </Link>

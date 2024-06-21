@@ -1,11 +1,8 @@
 import React from 'react'
-import NavBar from '../../components/NavBar1'
-import NavBar1 from '../../components/NavBar1'
 
 const AboutUsPage = () => {
     return (
-        <div>
-            <NavBar1/>
+        <div className='flex flex-col'>
             <div className=' flex flex-col justify-start items-start border p-60'>
                 <h1 className='text-4xl font-bold p-2'>
                     ABOUT US</h1>
@@ -18,13 +15,13 @@ const AboutUsPage = () => {
             </div>
 
 
-            <div className='flex flex-row justify-between items-center'>
-                <div className='p-40'>
-                    <h1 className='text-3xl p-2'>
+            <div className='flex flex-col justify-between items-center'>
+                <div className='p-40 flex-col justify-center items-center'>
+                    <h1 className='text-3xl p-2 flex justify-center  '>
                         Our Services</h1>
-                    <p className='font-thin'>
+                    <p className='font-thin flex-col justify-center'>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
-                        Lorem Ipsum has been the industrys <br />
+                            Lorem Ipsum has been the industrys <br />
                         standard dummy text ever since the 1500s,<br />
                         when an unknown printer took a galley of type and <br />
                         scrambled it to make a type specimen book.</p>

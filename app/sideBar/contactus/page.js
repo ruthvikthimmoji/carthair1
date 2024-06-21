@@ -10,7 +10,7 @@ const page = () => {
       <div>
         <NavBar/>
       </div>
-      <div className="flex flex-col justify-center items-center p-60  bg-cover bg-center">
+      <div className="flex flex-col justify-center  items-center  backdrop-blur-sm bg-white/10  p-60  bg-center">
         <h1 className='text-6xl'>
           CONTACT US
         </h1>
