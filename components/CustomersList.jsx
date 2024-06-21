@@ -37,7 +37,7 @@ export default async function CustomersList() {
             </h1>
             <div>
                 <div className="flex justify-between  p-4" >
-                    <table className="border rounded-md border-orange-400 border-separate  w-full my-6 mx-auto">
+                    <table className="border rounded-md border-orange-400 border-separate  w-full my-6 table-auto">
                         <thead>
                             <tr>
                                 <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Name</th>

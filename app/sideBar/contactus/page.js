@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FaHome, FaMailBulk, FaPhoneAlt } from 'react-icons/fa'
 import { HiMail } from 'react-icons/hi'
-import NavBar from './components/NavBar'
+import NavBar from '@/components/NavBar'
 
 const page = () => {
   return (
@@ -10,7 +10,7 @@ const page = () => {
       <div>
         <NavBar/>
       </div>
-      <div className="flex flex-col justify-center items-center p-60  bg-cover bg-center" style={{ backgroundImage: "url('./back.jpg')" }}>
+      <div className="flex flex-col justify-center items-center p-60  bg-cover bg-center">
         <h1 className='text-6xl'>
           CONTACT US
         </h1>

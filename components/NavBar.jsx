@@ -3,7 +3,7 @@ import { HiLogout } from 'react-icons/hi'
 
 function NavBar() {
   return (
-    <div className="flex justify-between p-6 mt-6 ">
+    <div className="flex justify-between p-6 mt-6">
         <h1 className="text-4xl font-bold glow-text">
           CARTHAIR
         </h1>
