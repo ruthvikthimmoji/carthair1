@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema } from "mongoose";
 
 
-const customerSchema = new Schema(
+const CustomerSchema = new Schema(
     {
         name: String,
         phonenumber: String,
@@ -14,7 +14,5 @@ const customerSchema = new Schema(
     }
 );
 
-const Customer = mongoose.models?.Customer || mongoose.model("Customer", customerSchema);
 
-
-export default Customer;
+export default CustomerSchema;

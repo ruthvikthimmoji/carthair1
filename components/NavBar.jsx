@@ -1,5 +1,5 @@
 import React from 'react'
-import { HiLogout } from 'react-icons/hi'
+import { AiOutlineLogout } from 'react-icons/ai'
 
 function NavBar() {
   return (
@@ -8,7 +8,7 @@ function NavBar() {
           CARTHAIR
         </h1>
         <button className="border-orange-200  text-3xl px-4 py-2 rounded-lg hover:bg-orange-200 hover:text-gray-800">
-          <HiLogout/></button>
+        <AiOutlineLogout/></button>
       </div>
   )
 }

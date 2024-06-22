@@ -1,15 +1,35 @@
-import mongoose, { connect } from "mongoose";
+// lib/mongoose.js
 
+import mongoose from 'mongoose';
 
-const connectMongoDB = async()=>{
-    try {
-       await mongoose.connect(process.env.MONGODB_URI);
-        console.log("connected to the DB")
-        
-    } catch (error) {
-        console.log(error)
-        
-    }
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+    throw new Error('Please add your Mongo URI to .env.local');
 }
-export default connectMongoDB;
 
+let cached = global.mongoose;
+
+if (!cached) {
+    cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function connectMongoDB() {
+    if (cached.conn) {
+        return cached.conn;
+    }
+
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false,
+        };
+
+        cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+            return mongoose;
+        });
+    }
+    cached.conn = await cached.promise;
+    return cached.conn;
+}
+
+export default connectMongoDB;
