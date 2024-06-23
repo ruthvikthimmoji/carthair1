@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import NavBar1 from './NavBar1'
 import { useRouter } from 'next/navigation';
 import { GrUpdate } from 'react-icons/gr';
-import CustomerSchema from '@/model/customers';
 
 export default function EditCustomersForm({ id, customer }) {
     const [newCustomer, setNewCustomer] = useState(customer);

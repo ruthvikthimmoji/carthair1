@@ -1,16 +1,15 @@
 import React from 'react'
-import DeleteBtn from './DeleteBtn'
+import DeleteBtn2 from './DeleteBtn2'
 import Link from 'next/link'
-import AddCustomers from './AddCustomers'
 import EditBtn from './EditBtn'
-import AddOffers from './AddOffers'
+import AddOffers from './AddOffers';
+import Toggle from './Toggle';
 
 
 
-
-const getCustomers = async () => {
+const getOffers = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/customers', {
+        const res = await fetch('http://localhost:3000/api/offers', {
             cache: "no-store",
         });
 
@@ -26,9 +25,9 @@ const getCustomers = async () => {
 }
 
 
-export default async function CustomersList() {
+export default async function OffersList() {
 
-   const { customers } = await getCustomers();
+    const { offers } = await getOffers();
 
 
     return (
@@ -42,17 +41,23 @@ export default async function CustomersList() {
                         <thead>
                             <tr>
                                 <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Offer</th>
-                                <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
-                                <th className="px-4 py-2 border rounded-md border-orange-400 text-left">status</th>
+                                <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Description</th>
+                                <th className="px-2 py-2 border rounded-md border-orange-400 text-left">isActive</th>
+                                <th className="px-4 py-2 border rounded-md border-orange-400 text-center">Actions</th>
 
                             </tr>
                         </thead>
                         <tbody className='border border-separate'>
-                            {customers.map(t => (
-                                <tr key={t._id}>
-                                    <td className='border-r p-2 '>{t.Offer}</td>
-                                    <td className='border-r p-2'>{t.phonenumber}</td>
-                                    <td className='p-2'>{t.status}</td>
+                            {offers.map(f => (
+                                <tr key={f._id}>
+                                    <td className='border-r p-2 '>{f.title}</td>
+                                    <td className='border-r p-2'>{f.description}</td>
+                                    <td className='border-r p-2'>{f.isActive} <Toggle/></td>
+
+                                    <td className='flex  flex-row justify-center px-2 py-2'>
+                                        <DeleteBtn2 id={f._id} />
+                                        <Link href={`/editOffers/${f._id}`}><EditBtn /></Link></td>
+
                                 </tr>
                             ))}
                         </tbody>

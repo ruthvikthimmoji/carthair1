@@ -1,26 +1,26 @@
 import connectMongoDB from "@/libs/mongodb";
-import CustomerSchema from "@/model/customers";
+import OfferSchema from "@/model/offers";
 import { NextResponse } from "next/server";
 
 const conn = await connectMongoDB();
-const db = conn.connection.useDb("customers_db");
-const Customer = db.model("Customer", CustomerSchema);
+const db = conn.connection.useDb("offers_db");
+const Offer = db.model("Offer", OfferSchema);
 
 export async function POST(request) {
-    const { name, phonenumber, date, services, attendant } = await request.json()
-    await Customer.create({ name, phonenumber, date, services, attendant });
-    return NextResponse.json({ message: "customer created" }, { status: 201 })
+    const { title, description, isActive} = await request.json()
+    await Offer.create({ title, description, isActive });
+    return NextResponse.json({ message: "offer created" }, { status: 201 })
 };
 
 export async function GET(){
     
-    const customers = await Customer.find({}).exec();
-    return NextResponse.json({customers});
+    const offers = await Offer.find({}).exec();
+    return NextResponse.json({offers});
 };
 
 export async function DELETE(request){
     const id = request.nextUrl.searchParams.get('id');
-    await Customer.findByIdAndDelete(id);
-    return NextResponse.json({message:"topic deleted"},{status:200})
+    await Offer.findByIdAndDelete(id);
+    return NextResponse.json({message:"offer deleted"},{status:200})
 
 }

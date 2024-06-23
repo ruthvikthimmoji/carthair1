@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
     <NavBar1/>
-    <OffersList/>
+  <OffersList/>
     </div>
   )
 }
