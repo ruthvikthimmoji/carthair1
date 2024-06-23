@@ -9,7 +9,6 @@ const getOfferById = async (id) => {
     if (!res.ok) {
       throw new Error("Failed to fetch")
     }
-    console.log(res.json);
     return res.json();
 
   } catch (error) {
