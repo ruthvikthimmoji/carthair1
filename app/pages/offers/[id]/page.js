@@ -9,6 +9,7 @@ const getOfferById = async (id) => {
     if (!res.ok) {
       throw new Error("Failed to fetch")
     }
+    console.log(res.json);
     return res.json();
 
   } catch (error) {
@@ -20,8 +21,8 @@ const getOfferById = async (id) => {
 async function EditOffer({ params }) {
   const { id } = params;
   const { offer } = await getOfferById(id)
-  return (
-    <EditOffersForm id={id} customer={offer} />
+  return (  
+    <EditOffersForm id={id} offer={offer} />
   )
 }
 
