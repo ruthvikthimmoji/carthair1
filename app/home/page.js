@@ -6,13 +6,13 @@ import React from 'react'
 const HomePage = () => {
     return (
         <div>
-<div>
-    <NavBar/>
-</div>
-<div>
-<SideBar/>
-</div>
-<PopUp/>
+            <div>
+                <NavBar />
+            </div>
+            <div>
+                <SideBar />
+            </div>
+            <PopUp />
 
         </div>
     )
