@@ -1,27 +1,19 @@
-"use client";
-import React from 'react'
-import NavBar from '../../components/NavBar'
+import NavBar from '@/components/NavBar'
 import SideBar from '@/components/SideBar'
-import { CircleLoader, HashLoader, RiseLoader } from 'react-spinners';
+import PopUp from '@/components/PopUp'
+import React from 'react'
 
 const HomePage = () => {
     return (
-        <div className='max-h-screen overflow-auto'>
-            <div className='he'>
-                <NavBar />
-            </div>
-            <div className='flex flex-row'>
-                <SideBar />
-                <div className='ml-60 mr-10 flex flex-col justify-between items-center p-60' >
+        <div>
+<div>
+    <NavBar/>
+</div>
+<div>
+<SideBar/>
+</div>
+<PopUp/>
 
-                    {/* <HashLoader
-                        color="#FFA726"
-                        cssOverride={{}}
-                        loading
-                    /> */}
-
-                </div>
-            </div>
         </div>
     )
 }
