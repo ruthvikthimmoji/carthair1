@@ -20,8 +20,8 @@ const getOfferById = async (id) => {
 async function EditOffer({ params }) {
   const { id } = params;
   const { offer } = await getOfferById(id)
-  return (
-    <EditOffersForm id={id} customer={offer} />
+  return (  
+    <EditOffersForm id={id} offer={offer} />
   )
 }
 
