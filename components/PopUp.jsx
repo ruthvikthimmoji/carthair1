@@ -33,7 +33,7 @@ export default function BasicSpeedDial() {
         icon={<SpeedDialIcon />}
       >
         {actions.map((action) => (
-          <SpeedDialAction className='bg-orange-400 text-xl hover:bg-gray-800 hover:text-orange-400 text-gray-800'
+          <SpeedDialAction className='bg-orange-400 text-xl  hover:bg-gray-800 hover:text-orange-400 text-gray-800'
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
