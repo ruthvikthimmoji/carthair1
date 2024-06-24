@@ -7,7 +7,7 @@ const HomePage = () => {
     return (
         <div>
             <NavBar />
-            <SideBar />
+            <SideBar/>
             <PopUp />
 
         </div>

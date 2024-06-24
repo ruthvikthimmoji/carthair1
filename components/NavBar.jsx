@@ -3,7 +3,7 @@ import { AiOutlineLogout } from 'react-icons/ai'
 
 function NavBar() {
   return (
-    <div className="flex justify-between p-6 mt-6">
+    <div className="container mx-auto p-6 flex items-center justify-between">
         <h1 className="text-4xl font-bold glow-text">
           CARTHAIR
         </h1>
