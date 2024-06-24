@@ -19,7 +19,7 @@ export default function Navbar2() {
     Settings</li>
   <button className='border-2 drop-shadow-lg rounded-full border-orange-400 px-4 p-2'> 
   <li className='font-thin'> 
-    Login/signup </li>
+    Login </li>
   </button>
 </ul>
   </div>
