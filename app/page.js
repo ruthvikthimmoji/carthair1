@@ -17,7 +17,7 @@ export default function Home() {
           <h1 className="text-4xl  font-bold">
             Manage Your Salon </h1>
           <p className="text-2xl  font-thin">
-            Get best for your salon</p>
+            Get the best for your salon</p>
           <button className="border  text-xl  text-gray-800 bg-orange-400 rounded-lg px-8 py-3 mt-6">
             Get Started
           </button>

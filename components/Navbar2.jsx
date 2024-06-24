@@ -14,7 +14,7 @@ export default function Navbar2() {
   <li className='p-2 font-thin'>
     About</li>
   <li className='p-2 font-thin'>
-    Contactus</li>
+    Contact Us</li>
   <li  className='p-2 font-thin'>
     Settings</li>
   <button className='border-2 drop-shadow-lg rounded-full border-orange-400 px-4 p-2'> 
