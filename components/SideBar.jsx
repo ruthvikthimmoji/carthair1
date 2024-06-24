@@ -46,9 +46,9 @@ export default function SideBar() {
 
 
     return (
-            <div className='flex flex-col md:flex-row h-full'>
+            <div className='flex flex-col md:flex-row ` h-full'>
                 <div className='w-full mt-4 md:w-1/4 lg:w-1/5 bg-orange-400 md:rounded-lg'>
-                    <ul className='flex flex-col p-4 border-b-2 rounded-t-lg md:rounded-t-none md:rounded-b-lg text-2xl bg-orange-400 md:border-r-0 md:border-b-2'>
+                    <ul className='flex flex-col p-4 border-b-2 rounded-b-lg md:rounded-t-none md:rounded-b-lg text-2xl bg-orange-400 md:border-r-0 md:border-b-2'>
                         {mainLinks.map(({ icon, name }) => (
                             <li key={name} className={`pl-6 py-3 p-4 rounded-lg hover:bg-gray-500 ${name === "Home" ? "bg-gray-500" : ""}`}>
                                 <a href='#' className='flex items-center gap-5'>
