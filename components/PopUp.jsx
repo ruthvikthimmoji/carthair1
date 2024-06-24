@@ -25,14 +25,15 @@ export default function BasicSpeedDial() {
         sx={{ position: 'absolute', bottom: 16, right: 16,
             '& .MuiFab-primary': { // Applying custom styles to the FAB
             backgroundColor: '#FF9800', 
-            '&:hover': { // Slightly darker shade on hover
+            '&:hover': { 
+              backgroundColor: '#424242',// Slightly darker shade on hover
             }
           }
          }}
         icon={<SpeedDialIcon />}
       >
         {actions.map((action) => (
-          <SpeedDialAction
+          <SpeedDialAction className='bg-orange-400 text-xl hover:bg-gray-800 hover:text-orange-400 text-gray-800'
             key={action.name}
             icon={action.icon}
             tooltipTitle={action.name}
