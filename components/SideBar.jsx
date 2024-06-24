@@ -52,7 +52,7 @@ export default function SideBar() {
             <div className='w-full md:w-1/4 lg:w-1/5  md:rounded-b-lg md:rounded-t-lg backdrop-blur-lg bg-orange-200/30'>
                 <ul className='flex flex-col p-4 border-b-2 rounded-t-lg md:rounded-t-none md:rounded-b-lg text-2xl  md:border-b-2 md:border-r-0 border-gray-800'>
                     {mainLinks.map(({ icon, name, path }) => (
-                        <li key={name} className={`pl-6 py-3 p-4 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200 ${name === "Home" ? "bg-gray-800" : ""}`}>
+                        <li key={name} className={`pl-6 py-3 p-4 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200`}>
                             <Link href={path}>
                                 <div className='flex items-center gap-5'>
                                     {icon}
