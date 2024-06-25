@@ -19,7 +19,7 @@ export default function Home() {
           <p className="text-2xl  font-thin">
             Get the best for your salon</p>
           <button className="border  text-xl  text-gray-800 bg-orange-400 rounded-lg px-8 py-3 mt-6">
-            Get Started
+           <a href="/login">Get Started</a> 
           </button>
         </div>
         <div className=" flex-row justify-between border rounded-lg  backdrop:blur-lg bg-orange-200/20 p-4">

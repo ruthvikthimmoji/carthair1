@@ -12,8 +12,8 @@ const LoginPage = () => {
             LOGIN
           </h1>
           <div className=' flex flex-col justify-center p-4'>
-            <label htmlFor='email' className='font-serif p-2 '>
-              Email</label>
+            <label htmlFor='tel' className='font-serif p-2 '>
+              Phone Number</label>
             <input type='email' id='email' className='border-b-2  border-orange-400 bg-transparent  py-2 px-5' />
           </div>
           <div className=' flex flex-col justify-center p-4'>
