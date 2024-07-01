@@ -10,8 +10,8 @@ import Link from 'next/link';
 
 
 const actions = [
-  { icon: <FaUsers />, name: 'Add Customers'  },
-  { icon: <RiCoupon3Line/>, name: 'Add Users' },
+  { icon: <FaUsers />, name: 'Add Customers', path :"/addCustomers" },
+  { icon: <RiCoupon3Line/>, name: 'Add Users', path : "/addOffers" },
 
 ];
 
@@ -36,6 +36,7 @@ export default function BasicSpeedDial() {
           <SpeedDialAction className='bg-orange-400 text-xl  hover:bg-gray-800 hover:text-orange-400 text-gray-800'
             key={action.name}
             icon={action.icon}
+            path={action.path}
             tooltipTitle={action.name}
           />
         ))}

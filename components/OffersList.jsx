@@ -18,6 +18,7 @@ const getOffers = async () => {
     return res.json();
   } catch (error) {
     console.log("Error in loading", error);
+        return { offrs: [] }; 
   }
 };
 

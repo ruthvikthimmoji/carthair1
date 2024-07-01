@@ -18,7 +18,7 @@ const LoginPage = () => {
           </div>
           <div className=' flex flex-col justify-center p-4'>
             <label htmlFor='password' className='font-serif p-2'>
-              password</label>
+              OTP</label>
             <input type='password' id='password' className=' border-b-2 border-orange-400 bg-transparent py-2 px-3' />
           </div>
           <div class="rounded flex justify-start">
@@ -36,7 +36,7 @@ const LoginPage = () => {
         </form>
       </div>
       <footer className=" flex flex-col justify-center items-center">
-        <div className="text-center mt-4 font-extralight" >
+        <div className="text-center font-extralight" >
           <span>&copy; SalonApp. All rights reserved.</span>
         </div>
       </footer>
