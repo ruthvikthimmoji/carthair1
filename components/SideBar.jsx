@@ -25,7 +25,7 @@ export default function SideBar() {
         {
             icon: <CiDiscount1 />,
             name: "Offers",
-            path: "/pages/offers"  // Ensure the path is correctly defined
+            path: "/pages/offers"
         },
         {
             icon: <MdOutlineConnectWithoutContact />,
@@ -38,21 +38,21 @@ export default function SideBar() {
         {
             icon: <MdOutlineLogout />,
             name: "Logout",
-            path: "/"  // Corrected path
+            path: "/"
         },
         {
             icon: <MdSettings />,
             name: "Settings",
-            path: "/settings"  // Added missing path
+            path: "/settings"
         }
     ];
 
     return (
-        <div className='flex flex-col md:flex-row pt-10 h-full'>
-            <div className='w-full md:w-1/4 lg:w-1/5  md:rounded-b-lg md:rounded-t-lg backdrop-blur-lg bg-orange-200/30'>
-                <ul className='flex flex-col p-4 border-b-2 rounded-t-lg md:rounded-t-none md:rounded-b-lg text-2xl  md:border-b-2 md:border-r-0 border-gray-800'>
+        <div className='flex flex-col lg:flex-row h-full'>
+            <div className='w-full lg:w-1/5 md:rounded-lg backdrop-blur-lg bg-orange-200/30'>
+                <ul className='flex flex-col lg:flex-col p-4 border-b-2 lg:border-b-2 lg:border-r-0 border-gray-800 text-2xl'>
                     {mainLinks.map(({ icon, name, path }) => (
-                        <li key={name} className={`pl-6 py-3 p-4 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200 ${name === "Home" ? "bg-orange-200" : ""}`}>
+                        <li key={name} className={`pl-6 py-3 mb-2 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200 ${name === "Home" ? "bg-orange-200" : ""}`}>
                             <Link href={path}>
                                 <div className='flex items-center gap-5'>
                                     {icon}
@@ -62,9 +62,9 @@ export default function SideBar() {
                         </li>
                     ))}
                 </ul>
-                <ul className='flex flex-col text-2xl p-4 rounded-b-lg md:rounded-b-lg md:rounded-t-lg'>
+                <ul className='flex flex-col lg:flex-col text-2xl p-4'>
                     {otherLinks.map(({ icon, name, path }) => (
-                        <li key={name} className={`pl-6 py-3 p-4 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200`}>
+                        <li key={name} className={`pl-6 py-3 mb-2 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200`}>
                             <Link href={path}>
                                 <div className='flex items-center gap-5'>
                                     {icon}

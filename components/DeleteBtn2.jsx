@@ -21,8 +21,11 @@ const DeleteBtn = ({id}) => {
   }
   return (
     <>
-    <button onClick={()=> removeOffers(id)} className=' flex justify-center hover:bg-orange-400 hover:text-gray-800 px-6 py-2 mr-4 border border-orange-400 rounded-lg '>
-      <HiTrash/> 
+     <button 
+      onClick={() => removeOffers(id)} 
+      className='flex justify-center items-center hover:bg-orange-400 hover:text-gray-800 px-4 py-2 mr-2 lg:px-6 lg:py-2 lg:mr-4 border border-orange-400 rounded-lg'
+    >
+      <HiTrash /> 
     </button>
    </>
   )
