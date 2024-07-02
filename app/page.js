@@ -13,7 +13,7 @@ export default function Home() {
           <h1 className="text-2xl lg:text-4xl font-bold">Manage Your Salon</h1>
           <p className="text-lg lg:text-2xl font-thin mt-4">Get the best for your salon</p>
           <button className="text-lg lg:text-xl hover:translate-x-1 lg:hover:translate-x-11  text-gray-800 bg-orange-400 rounded-lg px-6 lg:px-8 py-2 lg:py-3 mt-6">
-            <a href="/login">Get Started</a>
+            <a href="/login">Get Start</a>
           </button>
         </div>
         <div className="flex justify-center border rounded-lg backdrop:blur-lg bg-orange-200/20 p-4">
