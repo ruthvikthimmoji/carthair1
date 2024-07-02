@@ -50,7 +50,7 @@ export default async function OffersList() {
               </tr>
             </thead>
             <tbody className="border border-separate">
-              {offers.map((f) => (
+              {offers && offers.map((f) => (
                 <tr key={f._id}>
                   <td className="border-r p-2 ">{f.title}</td>
                   <td className="border-r p-2">{f.description}</td>

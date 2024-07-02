@@ -42,7 +42,7 @@ export default async function CustomersList() {
                         </tr>
                     </thead>
                     <tbody className='border border-separate'>
-                        {customers.map(t => (
+                        {customers && customers.map(t => (
                             <tr key={t._id}>
                                 <td className='border-r p-2'>{t.name}</td>
                                 <td className='border-r p-2'>{t.phonenumber}</td>

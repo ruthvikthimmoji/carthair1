@@ -5,8 +5,8 @@ import OffersList from '@/components/OffersList'
 const page = () => {
   return (
     <div>
-    <NavBar1/>
-  <OffersList/>
+      <NavBar1 />
+      <OffersList />
     </div>
   )
 }
