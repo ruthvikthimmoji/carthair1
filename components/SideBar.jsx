@@ -43,7 +43,7 @@ export default function SideBar() {
         {
             icon: <MdSettings />,
             name: "Settings",
-            path: "/settings"
+            path: "/"
         }
     ];
 
