@@ -64,15 +64,15 @@ export default function CustomersList() {
                         </tr>
                     </thead>
                     <tbody className='border border-separate'>
-                        {customers && customers.map((customer, index) => (
-                            <React.Fragment key={customer._id}>
+                        {customers && customers.map((t, index) => (
+                            <React.Fragment key={t._id}>
                                 <tr className="cursor-pointer">
-                                    <td className='border-r p-1'>{customer.name}</td>
-                                    <td className='border-r p-1'>{customer.phonenumber}</td>
-                                    <td className='border-r p-1'>{customer.date}</td>
+                                    <td className='border-r p-1'>{t.name}</td>
+                                    <td className='border-r p-1'>{t.phonenumber}</td>
+                                    <td className='border-r p-1'>{t.date}</td>
                                     <td className='flex justify-center items-center px-2 py-2'>
                                         <DeleteBtn id={customer._id} />
-                                        <Link href={`/editCustomers/${customer._id}`}><EditBtn /></Link>
+                                        <Link href={`/editCustomers/${t._id}`}><EditBtn /></Link>
                                         <button onClick={() => toggleCustomer(index)} className="focus:outline-none ml-6">
                                             {expandedCustomer === index ? (
                                                 <FontAwesomeIcon icon={faChevronDown} className="text-orange-200" />
@@ -86,8 +86,8 @@ export default function CustomersList() {
                                     <tr>
                                         <td colSpan="4" className="p-2 border  border-orange-400 border-separate rounded-md bg-orange-200 ">
                                             <div className="flex justify-around ml-6 mr-6 text-gray-800 ">
-                                                <div ><strong className='text-gray-800'>Services:</strong> {customer.services}</div>
-                                                <div><strong className='text-gray-800'>Attendant:</strong> {customer.attendant}</div>
+                                                <div ><strong className='text-gray-800'>Services:</strong> {t.services}</div>
+                                                <div><strong className='text-gray-800'>Attendant:</strong> {t.attendant}</div>
                                             </div>
                                             {/* Add more details here if needed */}
                                         </td>
