@@ -71,7 +71,7 @@ export default function CustomersList() {
                                     <td className='border-r p-1'>{t.phonenumber}</td>
                                     <td className='border-r p-1'>{t.date}</td>
                                     <td className='flex justify-center items-center px-2 py-2'>
-                                        <DeleteBtn id={customer._id} />
+                                        <DeleteBtn id={t._id} />
                                         <Link href={`/editCustomers/${t._id}`}><EditBtn /></Link>
                                         <button onClick={() => toggleCustomer(index)} className="focus:outline-none ml-6">
                                             {expandedCustomer === index ? (
