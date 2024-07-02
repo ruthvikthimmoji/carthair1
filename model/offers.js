@@ -5,7 +5,7 @@ const OfferSchema = new Schema(
     {
         title: String,
         description: String,
-        isActive: Boolean
+        isActive: String
     },
     {
         timestamps: true,
