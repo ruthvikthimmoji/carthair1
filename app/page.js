@@ -12,7 +12,7 @@ export default function Home() {
         <div className="backdrop:blur bg-orange-200/40 p-8 lg:p-24 border rounded-lg mb-6 lg:mb-0">
           <h1 className="text-2xl lg:text-4xl font-bold">Manage Your Salon</h1>
           <p className="text-lg lg:text-2xl font-thin mt-4">Get the best for your salon</p>
-          <button className="text-lg lg:text-xl hover:translate-x-1 lg:hover:translate-x-11 text-gray-800 bg-orange-400 rounded-lg px-6 lg:px-8 py-2 lg:py-3 mt-6">
+          <button className="text-lg lg:text-xl hover:translate-x-1 lg:hover:translate-x-11  text-gray-800 bg-orange-400 rounded-lg px-6 lg:px-8 py-2 lg:py-3 mt-6">
             <a href="/login">Get Started</a>
           </button>
         </div>
@@ -20,7 +20,7 @@ export default function Home() {
           <Image
             src="/img1.jpg"
             alt="Example Image"
-            width={400}
+            width={600}
             height={300}
             className="rounded-lg"
           />

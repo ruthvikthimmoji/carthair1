@@ -10,7 +10,7 @@ export default function Navbar2() {
             <a href='/'>Home</a>
           </li>
           <li className='p-2 font-thin'>
-            <a href='/pages/contactus'>About Us</a>
+            <a href='/pages/aboutUs'>About Us</a>
           </li>
           <li className='p-2 font-thin'>
             <a href='/pages/contactus'>Contact Us</a>

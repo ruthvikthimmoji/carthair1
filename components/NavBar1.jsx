@@ -6,9 +6,7 @@ import { AiOutlineLogout } from 'react-icons/ai';
 
 const NavBar1 = () => {
 
-
     const router = useRouter();
-
 
     const handleBack = () => {
         router.back();
@@ -28,7 +26,7 @@ const NavBar1 = () => {
                 CARTHAIR</h1>
             <div>
                 <button className='rounded-lg px-4 py-2 text-3xl hover:bg-orange-200 hover:text-gray-800'>
-                    <AiOutlineLogout/>
+                    <AiOutlineLogout />
                 </button>
             </div>
         </div>

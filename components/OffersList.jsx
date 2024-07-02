@@ -30,8 +30,8 @@ export default async function OffersList() {
       <h1 className="text-4xl font-thin flex flex-col justify-center items-center p-4 m-4 w-screen">
         OFFER DETAILS
       </h1>
-      <div>
-        <div className="flex justify-between  backdrop-blur-sm bg-orange-100/10  p-4">
+      <div >
+        <div className="flex justify-between overflow-x-auto  backdrop-blur-sm bg-orange-100/10  p-4">
           <table className="border rounded-md border-orange-400 border-separate w-screen my-6 table-auto">
             <thead>
               <tr>
