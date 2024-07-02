@@ -5,13 +5,13 @@ import { PiNumberCircleZeroFill } from "react-icons/pi";
 
 const notfound = () => {
   return (
-    <div className='flex flex-col h-screen justify-center items-center'>
-      <div className='flex text-8xl items-center'>
+    <div className='flex flex-row lg:flex-col h-screen justify-center items-center'>
+      <div className='flex text-4xl lg:text-8xl items-center'>
         <FaPage4 />
         <PiNumberCircleZeroFill />
         <FaPage4 />
       </div>
-      <h1 className='text-xs p-2'>
+      <h1 className='text-xs flex flex-row lg:flex-col  p-2'>
         Page does not Exist</h1>
     </div>
   )
