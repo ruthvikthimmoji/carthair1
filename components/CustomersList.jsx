@@ -57,19 +57,19 @@ export default function CustomersList() {
                 <table className="min-w-full table-auto border rounded-lg border-separate ">
                     <thead>
                         <tr>
-                            <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Name</th>
-                            <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
-                            <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Date</th>
-                            <th className="px-4 py-2 border rounded-md border-orange-400 text-center">Actions</th>
+                            <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Name</th>
+                            <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
+                            <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Date</th>
+                            <th className="px-2 py-2 border rounded-md border-orange-400 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody className='border border-separate'>
                         {customers && customers.map((customer, index) => (
                             <React.Fragment key={customer._id}>
                                 <tr className="cursor-pointer">
-                                    <td className='border-r p-2'>{customer.name}</td>
-                                    <td className='border-r p-2'>{customer.phonenumber}</td>
-                                    <td className='border-r p-2'>{customer.date}</td>
+                                    <td className='border-r p-1'>{customer.name}</td>
+                                    <td className='border-r p-1'>{customer.phonenumber}</td>
+                                    <td className='border-r p-1'>{customer.date}</td>
                                     <td className='flex justify-center items-center px-2 py-2'>
                                         <DeleteBtn id={customer._id} />
                                         <Link href={`/editCustomers/${customer._id}`}><EditBtn /></Link>
@@ -84,10 +84,10 @@ export default function CustomersList() {
                                 </tr>
                                 {expandedCustomer === index && (
                                     <tr>
-                                        <td colSpan="4" className="p-2 border  border-orange-400 border-separate rounded-md">
-                                            <div className="flex justify-around ml-6 mr-6 ">
-                                                <div><strong className='text-orange-200'>Services:</strong> {customer.services}</div>
-                                                <div><strong className='text-orange-200'>Attendant:</strong> {customer.attendant}</div>
+                                        <td colSpan="4" className="p-2 border  border-orange-400 border-separate rounded-md bg-orange-200 ">
+                                            <div className="flex justify-around ml-6 mr-6 text-gray-800 ">
+                                                <div ><strong className='text-gray-800'>Services:</strong> {customer.services}</div>
+                                                <div><strong className='text-gray-800'>Attendant:</strong> {customer.attendant}</div>
                                             </div>
                                             {/* Add more details here if needed */}
                                         </td>
