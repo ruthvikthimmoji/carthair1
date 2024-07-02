@@ -1,8 +1,11 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import DeleteBtn from './DeleteBtn';
 import Link from 'next/link';
 import AddCustomers from './AddCustomers';
 import EditBtn from './EditBtn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'; // Import Chevron icons from Font Awesome
 
 const getCustomers = async () => {
     try {
@@ -11,55 +14,89 @@ const getCustomers = async () => {
         });
 
         if (!res.ok) {
-            throw new Error("failed to fetch");
+            throw new Error("Failed to fetch");
         }
 
         return res.json();
     } catch (error) {
-        console.log("Error in loading", error);
-        return { customers: [] }; // Return an empty array if there's an error
+        console.error("Error in loading", error);
+        return { customers: [] };
     }
 };
 
-export default async function CustomersList() {
-    const { customers } = await getCustomers();
+export default function CustomersList() {
+    const [expandedCustomer, setExpandedCustomer] = useState(null);
+    const [customers, setCustomers] = useState([]);
+
+    const fetchCustomers = async () => {
+        const { customers } = await getCustomers();
+        setCustomers(customers);
+    };
+
+    useEffect(() => {
+        fetchCustomers();
+    }, []);
+
+    const toggleCustomer = (index) => {
+        if (expandedCustomer === index) {
+            setExpandedCustomer(null);
+        } else {
+            setExpandedCustomer(index);
+        }
+    };
 
     return (
         <div className="p-4 m-4 w-full">
-            <h1 className='text-4xl font-thin flex justify-center items-center mb-8'>
+            <h1 className='text-4xl font-thin text-center mb-8'>
                 CUSTOMER DETAILS
             </h1>
+            <div className='flex justify-end items-end mt-4'>
+                <AddCustomers />
+            </div>
             <div className="overflow-x-auto">
-                <table className="min-w-full border rounded-md border-orange-400 border-separate table-auto">
+                <table className="min-w-full table-auto border rounded-lg border-separate ">
                     <thead>
                         <tr>
                             <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Name</th>
                             <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
                             <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Date</th>
-                            <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Services</th>
-                            <th className="px-4 py-2 border rounded-md border-orange-400 text-left">Attendant</th>
                             <th className="px-4 py-2 border rounded-md border-orange-400 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody className='border border-separate'>
-                        {customers && customers.map(t => (
-                            <tr key={t._id}>
-                                <td className='border-r p-2'>{t.name}</td>
-                                <td className='border-r p-2'>{t.phonenumber}</td>
-                                <td className='border-r p-2'>{t.date}</td>
-                                <td className='border-r p-2'>{t.services}</td>
-                                <td className='border-r p-2'>{t.attendant}</td>
-                                <td className='flex flex-row justify-center px-2 py-2 space-x-2'>
-                                    <DeleteBtn id={t._id} />
-                                    <Link href={`/editCustomers/${t._id}`}><EditBtn /></Link>
-                                </td>
-                            </tr>
+                        {customers && customers.map((customer, index) => (
+                            <React.Fragment key={customer._id}>
+                                <tr className="cursor-pointer">
+                                    <td className='border-r p-2'>{customer.name}</td>
+                                    <td className='border-r p-2'>{customer.phonenumber}</td>
+                                    <td className='border-r p-2'>{customer.date}</td>
+                                    <td className='flex justify-center items-center px-2 py-2'>
+                                        <DeleteBtn id={customer._id} />
+                                        <Link href={`/editCustomers/${customer._id}`}><EditBtn /></Link>
+                                        <button onClick={() => toggleCustomer(index)} className="focus:outline-none ml-6">
+                                            {expandedCustomer === index ? (
+                                                <FontAwesomeIcon icon={faChevronDown} className="text-orange-200" />
+                                            ) : (
+                                                <FontAwesomeIcon icon={faChevronUp} className="text-gray-100" />
+                                            )}
+                                        </button>
+                                    </td>
+                                </tr>
+                                {expandedCustomer === index && (
+                                    <tr>
+                                        <td colSpan="4" className="p-2 border  border-orange-400 border-separate rounded-md">
+                                            <div className="flex justify-around ml-6 mr-6 ">
+                                                <div><strong className='text-orange-200'>Services:</strong> {customer.services}</div>
+                                                <div><strong className='text-orange-200'>Attendant:</strong> {customer.attendant}</div>
+                                            </div>
+                                            {/* Add more details here if needed */}
+                                        </td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
                         ))}
                     </tbody>
                 </table>
-            </div>
-            <div className='flex justify-end mt-4'>
-                <AddCustomers />
             </div>
         </div>
     );

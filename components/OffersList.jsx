@@ -18,7 +18,7 @@ const getOffers = async () => {
     return res.json();
   } catch (error) {
     console.log("Error in loading", error);
-        return { offrs: [] }; 
+    return { offrs: [] };
   }
 };
 
@@ -30,6 +30,9 @@ export default async function OffersList() {
       <h1 className="text-4xl font-thin flex flex-col justify-center items-center p-4 m-4 w-screen">
         OFFER DETAILS
       </h1>
+      <div className="flex justify-end p-4">
+        <AddOffers />
+      </div>
       <div >
         <div className="flex justify-between overflow-x-auto  backdrop-blur-sm bg-orange-100/10  p-4">
           <table className="border rounded-md border-orange-400 border-separate w-screen my-6 table-auto">
@@ -68,9 +71,6 @@ export default async function OffersList() {
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="flex justify-end p-4">
-          <AddOffers />
         </div>
       </div>
     </div>
