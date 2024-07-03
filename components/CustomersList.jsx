@@ -6,6 +6,7 @@ import AddCustomers from './AddCustomers';
 import EditBtn from './EditBtn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'; // Import Chevron icons from Font Awesome
+import NavbarAll from './NavbarAll';
 
 const getCustomers = async () => {
     try {
@@ -46,8 +47,9 @@ export default function CustomersList() {
     };
 
     return (
-        <div className="p-4 m-4 w-full">
-            <h1 className='text-4xl font-thin text-center mb-8'>
+        <div className="w-full">
+            <NavbarAll />
+            <h1 className='text-4xl font-thin text-center p-6'>
                 CUSTOMER DETAILS
             </h1>
             <div className='flex justify-end items-end mt-4'>
