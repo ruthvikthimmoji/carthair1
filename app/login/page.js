@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function LoginPage() {
   return (
@@ -21,9 +22,11 @@ function LoginPage() {
             <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline' id='password' type='password' />
           </div>
           <div className='flex items-center justify-between'>
+            <Link href='/home'>
             <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-6 rounded ' type='button'>
               Login
             </button>
+            </Link>
           </div>
         </form>
       </div>
@@ -31,8 +34,9 @@ function LoginPage() {
         <Image
           src='/img4.jpg'
           alt='404'
-          layout='fill'
-          objectFit='cover'
+          width={1080}
+          height={1920}
+          className='w-full h-full object-cover'
         />
       </div>
     </div>

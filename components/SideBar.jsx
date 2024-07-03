@@ -48,8 +48,8 @@ export default function SideBar() {
     ];
 
     return (
-        <div className='flex flex-col lg:flex-row h-full'>
-            <div className='w-full lg:w-1/5 md:rounded-lg backdrop-blur-lg bg-orange-200/30'>
+        <div className='flex flex-col lg:flex-row h-full mt-14'>
+            <div className='w-full lg:w-1/5 md:rounded-r-lg backdrop-blur-lg bg-orange-200/20'>
                 <ul className='flex flex-col lg:flex-col p-4 border-b-2 lg:border-b-2 lg:border-r-0 border-gray-800 text-2xl'>
                     {mainLinks.map(({ icon, name, path }) => (
                         <li key={name} className={`pl-6 py-3 mb-2 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200 ${name === "Home" ? "bg-orange-200" : ""}`}>
@@ -62,7 +62,7 @@ export default function SideBar() {
                         </li>
                     ))}
                 </ul>
-                <ul className='flex flex-col lg:flex-col text-2xl p-4'>
+                <ul className='flex flex-col lg:flex-col text-2xl p-4 mt-4'>
                     {otherLinks.map(({ icon, name, path }) => (
                         <li key={name} className={`pl-6 py-3 mb-2 rounded-lg text-orange-400 hover:text-gray-800 hover:bg-orange-200`}>
                             <Link href={path}>
@@ -74,9 +74,6 @@ export default function SideBar() {
                         </li>
                     ))}
                 </ul>
-            </div>
-            <div className='flex-1 p-4'>
-                {/* Main content goes here */}
             </div>
         </div>
     );
