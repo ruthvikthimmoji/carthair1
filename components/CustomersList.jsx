@@ -62,7 +62,7 @@ export default function CustomersList() {
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Name</th>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Date</th>
-                            <th className="px-2 py-2 border rounded-md border-orange-400 text-center">Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody className='border border-separate'>
@@ -72,14 +72,12 @@ export default function CustomersList() {
                                     <td className='border-r p-1'>{t.name}</td>
                                     <td className='border-r p-1'>{t.phonenumber}</td>
                                     <td className='border-r p-1'>{t.date}</td>
-                                    <td className='flex justify-center items-center px-2 py-2'>
-                                        <DeleteBtn id={t._id} />
-                                        <Link href={`/editCustomers/${t._id}`}><EditBtn /></Link>
-                                        <button onClick={() => toggleCustomer(index)} className="focus:outline-none ml-6">
+                                    <td>
+                                        <button onClick={() => toggleCustomer(index)}>
                                             {expandedCustomer === index ? (
-                                                <FontAwesomeIcon icon={faChevronDown} className="text-orange-200" />
+                                                <FontAwesomeIcon icon={faChevronUp} className="text-orange-200" />
                                             ) : (
-                                                <FontAwesomeIcon icon={faChevronUp} className="text-gray-100" />
+                                                <FontAwesomeIcon icon={faChevronDown} className="text-gray-100" />
                                             )}
                                         </button>
                                     </td>
@@ -88,8 +86,11 @@ export default function CustomersList() {
                                     <tr>
                                         <td colSpan="4" className="p-2 border  border-orange-400 border-separate rounded-md bg-orange-200 ">
                                             <div className="flex justify-around ml-6 mr-6 text-gray-800 ">
-                                                <div ><strong className='text-gray-800'>Services:</strong> {t.services}</div>
-                                                <div><strong className='text-gray-800'>Attendant:</strong> {t.attendant}</div>
+                                                <div ><strong className='text-gray-800 px-2 py-2'>Services:</strong> {t.services}</div>
+                                                <div><strong className='text-gray-800 px-2 py-2'>Attendant:</strong> {t.attendant}</div>
+                                                <td className='flex justify-center items-center '>
+                                                    <DeleteBtn id={t._id} />
+                                                    <Link href={`/editCustomers/${t._id}`}><EditBtn /></Link></td>
                                             </div>
                                             {/* Add more details here if needed */}
                                         </td>
