@@ -1,48 +1,42 @@
-import React from 'react'
-import NavBar1 from '../../components/NavBar1'
-import LoginBtn from './loginButton'
+import React from 'react';
+import Image from 'next/image';
 
-const LoginPage = () => {
-
-  const handleLogin = () => {
-
-  }
-
+function LoginPage() {
   return (
-    <div>
-      <NavBar1 />
-      <div className='h-screen flex flex-col justify-center items-center'>
-        <div className='border-2 border-orange-200 rounded-lg shadow-lg shadow-orange-200 px-8 pt-6 pb-8 mb-4'>
-          <h1 className='flex flex-col justify-center items-center text-2xl font-bold p-4 m-4'>
-            LOGIN
-          </h1>
-          <div className=' flex flex-col justify-center p-4'>
-            <label htmlFor='tel' className='font-serif p-2 '>
-              Phone Number</label>
-            <input type='email' id='email' className='border-b-2  border-orange-400 bg-transparent  py-2 px-5' />
-          </div>
-          <div className=' flex flex-col justify-center p-4'>
-            <label htmlFor='password' className='font-serif p-2'>
-              OTP</label>
-            <input type='password' id='password' className=' border-b-2 border-orange-400 bg-transparent py-2 px-3' />
-          </div>
-          <div className="rounded flex justify-start">
-            <label className="flex items-center p-4">
-              <input type="checkbox" className="form-checkbox text-grey-400 bg-gray-500" />
-              <span className='font-thin text-xs p-2'>
-                Remember me</span>
+    <div className='flex flex-col lg:flex-row h-screen'>
+      <div className='flex-1 flex flex-col items-center justify-center p-4 lg:p-10'>
+        <h1 className='text-3xl font-bold mb-4 lg:mb-6 p-6'>CARTHAIR</h1>
+        <h1 className='text-xl mb-6 lg:mb-8'>Login</h1>
+        <form className='w-full max-w-sm backdrop-blur-0 shadow-[0_0_5px_0] p-6 lg:p-16 rounded-lg'>
+          <div className='mb-4'>
+            <label className='block text-orange-200 text-sm mb-2' htmlFor='tel'>
+              Phone Number
             </label>
+            <input className='shadow border rounded w-full py-2 px-3 text-orange-400 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline' id='tel' type='tel' placeholder='Phone Number' />
           </div>
-            <LoginBtn />
-        </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
+              OTP
+            </label>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline' id='password' type='password' />
+          </div>
+          <div className='flex items-center justify-between'>
+            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-6 rounded ' type='button'>
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-      <footer className=" flex flex-col justify-center items-center">
-        <div className="text-center font-extralight" >
-          <span>&copy; SalonApp. All rights reserved.</span>
-        </div>
-      </footer>
+      <div className='flex-1 relative'>
+        <Image
+          src='/img4.jpg'
+          alt='404'
+          layout='fill'
+          objectFit='cover'
+        />
+      </div>
     </div>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

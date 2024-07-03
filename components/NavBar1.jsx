@@ -9,7 +9,7 @@ const NavBar1 = () => {
     const router = useRouter();
 
     const handleBack = () => {
-        router.back();
+        router.back('.');
     }
 
 

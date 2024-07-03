@@ -1,13 +1,13 @@
 import React from 'react';
 import { FaHome, FaPhoneAlt } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
-import NavBar from '@/components/NavBar';
+
 
 const ContactPage = () => {
   return (
     <div>
       <header>
-        <NavBar />
+
       </header>
 
       <main className="flex flex-col lg:flex-row justify-center items-center backdrop-blur-sm bg-white/10 p-20 lg:p-60 bg-center">
