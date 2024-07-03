@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import NavBar1 from "./NavBar1";
 import { useRouter } from "next/navigation";
 import { GrUpdate } from "react-icons/gr";
 
@@ -30,7 +29,6 @@ export default function EditOffersForm({ id, offer }) {
 
   return (
     <div>
-      <NavBar1 />
       <div>
         <h1 className="flex justify-center glow-text text-4xl font-thin p-10">
           EditCustomersForm

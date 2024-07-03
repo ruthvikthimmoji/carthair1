@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react'
-import NavBar1 from '../../components/NavBar1'
 import { useRouter } from 'next/navigation'
 
 
@@ -43,7 +42,6 @@ export default function AddOffers() {
 
         <div>
             <div>
-                <NavBar1 />
             </div>
             <h1 className='flex justify-center glow-text text-4xl font-thin p-10'>
                 Add Offers Details
