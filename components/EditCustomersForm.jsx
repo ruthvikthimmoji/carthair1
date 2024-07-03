@@ -43,7 +43,7 @@ export default function EditCustomersForm({ id, customer }) {
         <form onSubmit={handleSubmit}
           className='w-full max-w-sm backdrop-blur-0 shadow-[0_0_5px_0] p-6 lg:p-16 rounded-lg'>
           <div className='mb-4'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='tel'>
+            <label className='block text-orange-200 text-sm mb-2' >
               Customer Name
             </label>
             <input
@@ -52,7 +52,7 @@ export default function EditCustomersForm({ id, customer }) {
             />
           </div>
           <div className='mb-6'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
+            <label className='block text-orange-200 text-sm mb-2' >
               Phone Number
             </label>
             <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
@@ -60,7 +60,7 @@ export default function EditCustomersForm({ id, customer }) {
               type="tel" id="phone" name="phone" />
           </div>
           <div className='mb-6'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
+            <label className='block text-orange-200 text-sm mb-2'>
               Date
             </label>
             <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
@@ -68,7 +68,7 @@ export default function EditCustomersForm({ id, customer }) {
               type='Date' placeholder='dd/mm/yyyy' />
           </div>
           <div className='mb-6'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
+            <label className='block text-orange-200 text-sm mb-2'>
               Services
             </label>
             <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
@@ -76,7 +76,7 @@ export default function EditCustomersForm({ id, customer }) {
               type='text' />
           </div>
           <div className='mb-6'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
+            <label className='block text-orange-200 text-sm mb-2' >
             Attendant
             </label>
             <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'

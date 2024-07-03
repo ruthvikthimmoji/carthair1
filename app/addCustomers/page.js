@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image';
 
 
 
@@ -42,37 +43,64 @@ export default function AddCustomers() {
 
     return (
 
-        <div>
-            <div>
-            </div>
-            <h1 className='flex justify-center glow-text text-4xl font-thin p-10'>
-                Add Customers Details
-                </h1>
-            <div className=' flex justify-center items-center p-10'>
-                <form className=' flex flex-col justify-center rounded-lg px-4 py-2 bg-orange-200' onSubmit={handleSubmit} >
-                <div className='flex flex-col justify-center shadow-lg shadow-black rounded-lg px-4 py-2 m-4 '>
-                    <label className='p-2 text-gray-800'>
-                         Customer Name 
-                         </label>
-                    <input className='border border-gray-800 text-gray-800 rounded-lg px-6 py-2 m-2 bg-transparent' onChange={(e) => setName(e.target.value)} value={name}  type='text' />
-                    <label className='p-2 text-gray-800'>
-                        Phone Number </label>
-                    <input className='border border-gray-800 text-gray-800 rounded-lg px-6 py-2 m-2 bg-transparent' onChange={(e) => setPhonenumber(e.target.value)} value={phonenumber}  type="tel" id="phone" name="phone" />
-                    <label className='p-2 text-gray-800'>
-                        Date </label>
-                    <input className='border border-gray-800 text-gray-800 rounded-lg px-6 py-2 m-2 bg-transparent' onChange={(e) => setDate(e.target.value)} value={date} type='Date'  placeholder='dd/mm/yyyy' />
-                    <label className='p-2 text-gray-800'>
-                        Services </label>
-                    <input className='border border-gray-800 text-gray-800 rounded-lg px-6 py-2 m-2 bg-transparent' onChange={(e) => setAttendant(e.target.value)} value={attendant}  type='text' />
-                    <label className='p-2 text-gray-800'>
-                        Attendant </label>
-                    <input className='border border-gray-800 text-gray-800 rounded-lg px-6 py-2 m-2 bg-transparent' onChange={(e) => setServices(e.target.value)} value={services} type='text' />
-                    </div>
-                    <button className='hover:bg-transparent hover:border  px-6 py-2 ml-4 mb-4 rounded-lg text-gray-800 bg-orange-500 hover:text-orange-400'>
-                        Add Customers </button>
-                </form>
-            </div>
-        </div>
+        <div className='flex flex-col lg:flex-row h-screen'>
+          <div className='flex-1 relative'>
+        <Image
+          src='/2.svg'
+          alt='404'
+          width={1080}
+          height={1920}
+          className='w-full h-full object-cover'
+        />
+      </div>
+      <div className='flex-1 flex flex-col items-center justify-center p-4 lg:p-10'>
+        <h1 className='text-4xl font-thin glow-text mb-4 lg:mb-6 p-6'> ADD CUSTOMERS</h1>
+        <form onSubmit={handleSubmit}
+          className='w-full max-w-sm backdrop-blur-0 shadow-[0_0_5px_0] p-6 lg:p-16 rounded-lg'>
+          <div className='mb-4'>
+            <label className='block text-orange-200 text-sm mb-2' >
+              Customer Name
+            </label>
+            <input
+              className='shadow border rounded w-full py-2 px-3 text-orange-400 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+              onChange={(e) => setName(e.target.value)} value={name}  type='text'/>
+          </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2' >
+              Phone Number
+            </label>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+             onChange={(e) => setPhonenumber(e.target.value)} value={phonenumber}  type="tel" id="phone" name="phone"/>
+          </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2'>
+              Date
+            </label>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+              onChange={(e) => setDate(e.target.value)} value={date} type='Date'  placeholder='dd/mm/yyyy' />
+          </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2'>
+              Services
+            </label>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+               onChange={(e) => setServices(e.target.value)} value={services} type='text'/>
+          </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2' >
+            Attendant
+            </label>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+              onChange={(e) => setAttendant(e.target.value)} value={attendant} type='text'  />
+          </div>
+          <div className='flex items-center justify-center '>
+            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-8 rounded ' type='button'>
+              Add Customers
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
     )
 }
 
