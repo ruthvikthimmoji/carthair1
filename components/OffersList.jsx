@@ -53,17 +53,17 @@ export default async function OffersList() {
               </tr>
             </thead>
             <tbody className="border border-separate">
-              {offers && offers.map((t) => (
-                <tr key={f._id}>
-                  <td className="border-r p-2 ">{t.title}</td>
-                  <td className="border-r p-2">{t.description}</td>
+              {offers && offers.map((offer) => (
+                <tr key={offer._id}>
+                  <td className="border-r p-2 ">{offer.title}</td>
+                  <td className="border-r p-2">{offer.description}</td>
                   <td className="border-r p-2">
-                    {f.isActive} <Toggle />
+                    <Toggle />
                   </td>
 
                   <td className="flex  flex-row justify-center px-2 py-2">
-                    <DeleteBtn2 id={t._id} />
-                    <Link href={`./offers/${t._id}`}>
+                    <DeleteBtn2 id={offer._id} />
+                    <Link href={`./offers/${offer._id}`}>
                       <EditBtn />
                     </Link>
                   </td>
