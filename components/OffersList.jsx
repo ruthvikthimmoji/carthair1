@@ -3,7 +3,7 @@ import AddOffers from "./AddOffers";
 import Accordion from "./Accordian";
 import NavbarAll from "./NavbarAll";
 
-const getOffers = async () => {
+export async function getServerSideProps() {
   try {
     const res = await fetch("http://localhost:3000/api/offers", {
       cache: "no-store",
@@ -13,19 +13,27 @@ const getOffers = async () => {
       throw new Error("failed to fetch");
     }
 
-    return res.json();
+    const offers = await res.json();
+
+    return {
+      props: {
+        offers,
+      },
+    };
   } catch (error) {
     console.log("Error in loading", error);
-    return { offers: [] };
+    return {
+      props: {
+        offers: [],
+      },
+    };
   }
-};
+}
 
-export default async function OffersList() {
-  const { offers } = await getOffers();
-
+const OffersList = ({ offers }) => {
   return (
     <div>
-      <NavbarAll/>
+      <NavbarAll />
       <h1 className="text-4xl font-thin flex flex-col justify-center items-center p-4 m-6 w-screen ">
         OFFER DETAILS
       </h1>
@@ -37,4 +45,6 @@ export default async function OffersList() {
       </div>
     </div>
   );
-}
+};
+
+export default OffersList;
