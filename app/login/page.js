@@ -1,46 +1,130 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client"
+import React, { useState } from 'react'
+import { FaPhoneAlt, FaShieldAlt, FaSpinner } from 'react-icons/fa'
+import { HiSparkles } from 'react-icons/hi'
+import { auth } from '../firebase.config'
+import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth'
+import { useRouter } from 'next/navigation'
 
-function LoginPage() {
-  return (
-    <div className='flex flex-col lg:flex-row h-screen'>
-      <div className='flex-1 flex flex-col items-center justify-center p-4 lg:p-10'>
-        <h1 className='text-3xl font-bold mb-4 lg:mb-6 p-6'>CARTHAIR</h1>
-        <h1 className='text-xl mb-6 lg:mb-8'>Login</h1>
-        <form className='w-full max-w-sm backdrop-blur-0 shadow-[0_0_5px_0] p-6 lg:p-16 rounded-lg'>
-          <div className='mb-4'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='tel'>
-              Phone Number
-            </label>
-            <input className='shadow border rounded w-full py-2 px-3 text-orange-400 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline' id='tel' type='tel' placeholder='Phone Number' />
-          </div>
-          <div className='mb-6'>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
-              OTP
-            </label>
-            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline' id='password' type='password' />
-          </div>
-          <div className='flex items-center justify-between'>
-            <Link href='/home'>
-            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-6 rounded ' type='button'>
-              Login
-            </button>
-            </Link>
-          </div>
-        </form>
-      </div>
-      <div className='flex-1 relative'>
-        <Image
-          src='/img4.jpg'
-          alt='404'
-          width={1080}
-          height={1920}
-          className='w-full h-full object-cover'
-        />
-      </div>
-    </div>
-  );
+
+
+
+export default function LoginPage() {
+  const [otp, setOtp] = useState('');
+  const [ph, setPh] = useState('');
+  const [showOtp, setShowOtp] = useState(false)
+  const [user,setUser] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleChangePh = (e) => {
+    setPh(e.target.value)
+  }
+
+  const handleChangeOtp = (e) => {
+    setOtp(e.target.value)
+  }
+
+
+function onCaptchVerify () {
+  if (!window.recaptchaVerifier){
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      'size': 'invisible',
+      'callback': (response) => {
+        onSignup()
+      },
+      'expired-callback': () => {},
+    });
+    
+  }
 }
 
-export default LoginPage;
+function onSignup(){
+  setLoading(true)
+  onCaptchVerify()
+  const appVerifier = window.recaptchaVerifier
+
+
+  const formatPh = '+' + ph
+  signInWithPhoneNumber(auth, formatPh, appVerifier)
+    .then((confirmationResult) => {
+      window.confirmationResult = confirmationResult;
+      setLoading(false);
+      setShowOtp(true);
+    }).catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
+
+}
+
+function onOTPVerify(){
+  setLoading(true)
+  window.confirmationResult.confirm(otp).then (async(res)=>{
+    console.log(res);
+    setUser(res.user);
+    setLoading(false);
+    router.push('/home')
+  }).catch(err=>{
+    console.log(err);
+    setLoading(false);
+  })
+}
+
+
+
+
+  return (
+    <section className='bg-grey-400 flex items-center justify-center h-screen'>
+      <div>
+        <div id='recaptcha-container'></div>
+        {user ? (
+            <h2 className='text-center font-medium text-2xl'>
+            👍 Login Success
+          </h2>
+          ):(
+        <div className='w-80 flex flex-col gap-4 rounded-lg p-4'>
+          <h1> welcome</h1>
+          {
+            showOtp ?(
+              <>
+                <div className='bg-orange-200 rounded-full w-fit p-4 mx-auto text-gray-800'>
+                  <FaShieldAlt size={30} />
+                </div>
+                <label htmlFor='otp'
+                  className='font-bold text-2xl text-center'>
+                  Enter Your OTP
+                </label>
+                <input type='otp' value={otp}
+                  onChange={handleChangeOtp}>
+                </input>
+                <button onClick={onOTPVerify}
+                 className='bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 rounded'>
+                  {loading && <HiSparkles size={30} className='mt-1 animate-pulse' />
+                  }
+                  <span>Verify OTP</span>
+                </button>
+              </> ):(
+              <>
+                <div className='bg-orange-200 rounded-full w-fit p-4 mx-auto text-gray-800'>
+                  <FaPhoneAlt size={30} />
+                </div>
+                <label htmlFor=''
+                  className='font-bold text-xl text-center'>
+                  Enter Your PhoneNumber
+                </label>
+                <input type='tel' value={ph} onChange={handleChangePh} />
+                <button onClick={onSignup} className='bg-emerald-600 w-full flex gap-1 items-center justify-center py-2.5 rounded'>
+                  {loading && <HiSparkles size={30} className='mt-1 animate-pulse' />
+                  }
+                  <span>Send OTP</span>
+                </button>
+              </>
+          )}
+        </div>
+              )}
+
+      </div>
+    </section>
+  )
+}
