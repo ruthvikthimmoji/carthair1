@@ -69,34 +69,38 @@ export default function OffrsList(){
   //   }
   // };
   return(
-    <div>
+    <div className="w-full">
       <NavbarAll/>
-      <h1>
+      <h1 className="text-4xl font-thin text-center p-6">
         OFFER DEATILS
       </h1>
-      <div>
+      <div className="flex justify-end items-end mt-4">
         <AddOffers/>
       </div>
-      <div>
-        <table>
+      <div className="overflow-x-auto">
+        <table className="min-w-full table-auto border rounded-lg border-separate">
           <thead>
             <tr>
-              <th>Title</th>
-              <th>Description</th>
+              <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Title</th>
+              <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Description</th>
+              <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Actions</th>
+
             </tr>
           </thead>
-          <tbody>
+          <tbody className="border border-separate">
             {offers && offers.map((f,index)=>(
               <React.Fragment key = {f.id}>
                 <tr>
-                  <td>{f.title}</td>
-                  <td>{f.description}</td>
-                  <div>
+                  <td className="border-r p-1">{f.title}</td>
+                  <td className="border-r p-1">{f.description}</td>
+                  <td className="border-r p-1">
+                  <div className="flex justify-around mx-6 text-gray-800 ">
                     <DeleteBtn id = {f._id} />
                     <Link href={`/editOffers/${f._id}`}>
                     <EditBtn/>
                     </Link>
                   </div>
+                  </td>
                 </tr>
               </React.Fragment>
             ))}

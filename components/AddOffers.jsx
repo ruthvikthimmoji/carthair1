@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { Fa500Px, FaPlus } from 'react-icons/fa'
+import { FaPlus } from 'react-icons/fa'
 
 const AddOffers = () => {
   return (
