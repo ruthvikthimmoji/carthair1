@@ -1,6 +1,6 @@
+"use client";
 import React from "react";
 import AddOffers from "./AddOffers";
-import Accordion from "./Accordian";
 import NavbarAll from "./NavbarAll";
 import * as Realm from "realm-web";
 import Link from 'next/link';
