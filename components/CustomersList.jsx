@@ -8,10 +8,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'; // Import Chevron icons from Font Awesome
 import NavbarAll from './NavbarAll';
 
+import * as Realm from "realm-web";
+
 const getCustomers = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/customers', {
-            cache: "no-store",
+        async function loginEmailPassword(email, password) {
+            const app = new Realm.App({ id: 'data-gacfoem' });
+
+            // Create an email/password credential
+            const credentials = Realm.Credentials.emailPassword(email, password);
+            // Authenticate the user
+            const user = await app.logIn(credentials);
+            // 'App.currentUser' updates to match the logged in user
+            console.assert(user.id === app.currentUser.id);
+            return user;
+        }
+
+        const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+
+        const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/find', {
+            method: 'POST',
+            headers: {
+                'Access-Control-Request-Headers': '*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.accessToken
+            },
+            cache: "no-cache",
+            body: JSON.stringify({
+                "collection": "customers",
+                "database": "customersDB",
+                "dataSource": "Cluster0",
+                "projection": {}
+            })
         });
 
         if (!res.ok) {
@@ -30,8 +58,8 @@ export default function CustomersList() {
     const [customers, setCustomers] = useState([]);
 
     const fetchCustomers = async () => {
-        const { customers } = await getCustomers();
-        setCustomers(customers);
+        const { documents } = await getCustomers();
+        setCustomers(documents);
     };
 
     useEffect(() => {
@@ -62,18 +90,20 @@ export default function CustomersList() {
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Name</th>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Date</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody className='border border-separate'>
                         {customers && customers.map((t, index) => (
                             <React.Fragment key={t._id}>
-                                <tr className="cursor-pointer">
+                                <tr className="cursor-pointer" onClick={() => toggleCustomer(index)}>
                                     <td className='border-r p-1'>{t.name}</td>
                                     <td className='border-r p-1'>{t.phonenumber}</td>
-                                    <td className='border-r p-1'>{t.date}</td>
-                                    <td>
-                                        <button onClick={() => toggleCustomer(index)}>
+                                    <td className='border-r p-1 flex flex-row justify-between'>
+                                        <span>
+                                            {t.date}
+                                        </span>
+                                        <button
+                                            className='px-2 py-1'>
                                             {expandedCustomer === index ? (
                                                 <FontAwesomeIcon icon={faChevronUp} className="text-orange-200" />
                                             ) : (
@@ -85,14 +115,16 @@ export default function CustomersList() {
                                 {expandedCustomer === index && (
                                     <tr>
                                         <td colSpan="4" className="p-2 border  border-orange-400 border-separate rounded-md bg-orange-200 ">
-                                            <div className="flex justify-around ml-6 mr-6 text-gray-800 ">
-                                                <div ><strong className='text-gray-800 px-2 py-2'>Services:</strong> {t.services}</div>
-                                                <div><strong className='text-gray-800 px-2 py-2'>Attendant:</strong> {t.attendant}</div>
-                                                <td className='flex justify-center items-center '>
+                                            <div className="flex justify-around mx-6 text-gray-800 ">
+                                                <div><strong className='text-gray-800'>Services:</strong> {t.services}</div>
+                                                <div><strong className='text-gray-800'>Attendant:</strong> {t.attendant}</div>
+                                                <div className='flex justify-center items-center '>
                                                     <DeleteBtn id={t._id} />
-                                                    <Link href={`/editCustomers/${t._id}`}><EditBtn /></Link></td>
+                                                    <Link href={`/editCustomers/${t._id}`}>
+                                                        <EditBtn />
+                                                    </Link>
+                                                </div>
                                             </div>
-                                            {/* Add more details here if needed */}
                                         </td>
                                     </tr>
                                 )}

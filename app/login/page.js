@@ -102,7 +102,7 @@ export default function LoginPage() {
                   type='otp' 
                   value={otp}
                   onChange={handleChangeOtp}
-                  className='bg-transparent border py-2 border-orange-600 rounded-full'>
+                  className='bg-transparent border py-2 pl-4 border-orange-600 rounded-full'>
                   </input>
                   <button onClick={onOTPVerify}
                   className='bg-orange-600 text-gray-800 hover:border hover:bg-transparent  hover:text-orange-600 border border-orange-600 w-full flex gap-1 items-center justify-center py-2.5 rounded-full'>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                   type='tel' 
                   value={ph} 
                   onChange={handleChangePh} 
-                  className='bg-transparent border py-2 border-orange-600 rounded-full'/>
+                  className='bg-transparent border py-2 pl-4 border-orange-600 rounded-full'/>
                   <button onClick={onSignup} 
                   className='bg-orange-600 text-gray-800 hover:border hover:bg-transparent  hover:text-orange-600 border border-orange-600 w-full flex gap-1 items-center justify-center py-2.5 rounded-full'>
                     {loading && <HiSparkles size={30} className='mt-1 animate-pulse' />

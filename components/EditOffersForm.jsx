@@ -60,20 +60,8 @@ export default function EditOffersForm({ id, offer }) {
               name="text"
             />
           </div>
-          <div>
-            <label className='block text-orange-200 text-sm mb-2' htmlFor='password'>
-              isActive :
-            </label>
-            <input className='mb-3 border-orange-400 focus:outline-none focus:shadow-outline'
-              onChange={(e) =>
-                setNewOffer({ ...newOffer, isActive: e.target.value })
-              }
-              value={newOffer.isActive}
-              type="checkbox"
-            />
-          </div>
           <div className='flex items-center justify-center '>
-            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-8 rounded ' type='button'>
+            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-8 rounded ' type='submit'>
               Update
             </button>
           </div>

@@ -22,6 +22,10 @@ async function connectMongoDB() {
     if (!cached.promise) {
         const opts = {
             serverSelectionTimeoutMS: 50000, // Increase timeout
+            serverApi: {
+                strict: true,
+                deprecationErrors: true,
+              }
         };
 
         cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
