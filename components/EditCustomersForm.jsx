@@ -84,7 +84,7 @@ export default function EditCustomersForm({ id, customer }) {
               type='text' />
           </div>
           <div className='flex items-center justify-center '>
-            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-8 rounded ' type='button'>
+            <button className=' text-gray-800 bg-orange-500 hover:text-orange-400 hover:bg-transparent hover:border border-orange-400 font-bold py-2 px-8 rounded ' type='submit'>
               Update
             </button>
           </div>
