@@ -64,7 +64,7 @@ export default function LoginPage() {
     window.confirmationResult.confirm(otp).then(async (res) => {
       console.log(res);
       setUser(res.user);
-      localStorage.setItem('owner', res)
+      localStorage.setItem('owner_id', res._tokenResponse.localId)
       setLoading(false);
       router.push('/home')
     }).catch(err => {
