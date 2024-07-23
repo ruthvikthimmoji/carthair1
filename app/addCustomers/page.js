@@ -20,6 +20,9 @@ const addCustomers = async (name, phonenumber, date, attendant, services) => {
 
   try {
     const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+
+    const owner=localStorage.getItem('owner');
+
     const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/insertOne', {
       method: 'POST',
       headers: {
@@ -37,7 +40,8 @@ const addCustomers = async (name, phonenumber, date, attendant, services) => {
           "phonenumber": phonenumber,
           "date": date,
           "attendant": attendant,
-          "services": services
+          "services": services,
+          "owner_id": owner._tokenResponse.localId
         }
       })
     });
