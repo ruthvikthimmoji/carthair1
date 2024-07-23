@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as Realm from "realm-web";
 
-// Function to log in with email and password
 const loginEmailPassword = async (email, password) => {
   const app = new Realm.App({ id: 'data-gacfoem' });
   const credentials = Realm.Credentials.emailPassword(email, password);
@@ -13,7 +12,6 @@ const loginEmailPassword = async (email, password) => {
   return user;
 };
 
-// Function to add customers to the database
 const addCustomers = async (name, phonenumber, date, attendant, services) => {
   if (!name || !phonenumber || !date || !attendant || !services) {
     alert("All fields are required.");

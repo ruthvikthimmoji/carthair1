@@ -62,14 +62,11 @@ export default function AddOffers() {
     e.preventDefault();
     const result = await addOffers(title, description, isActive);
     if (result) {
-      // Update state with the new offers
       setOffers([...offers, result]);
-      // Reset form fields
       setTitle("");
       setDescription("");
       setIsActive(true);
-      // Optionally, redirect or show success message
-      router.push('/pages/offers'); // Uncomment if you want to redirect
+      router.push('/pages/offers'); 
       alert("Offer added successfully!");
     }
   };

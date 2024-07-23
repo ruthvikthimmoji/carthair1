@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from "react";
 import AddOffers from "./AddOffers";
 import NavbarAll from "./NavbarAll";
-import * as Realm from "realm-web";
 import Link from 'next/link';
-import EditBtn from "./EditBtn";
 import { HiTrash, HiPencil } from 'react-icons/hi';
+import * as Realm from "realm-web";
 
 
 export default function OffersList() {
