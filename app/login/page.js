@@ -85,6 +85,7 @@ export default function LoginPage() {
           <h2 className='text-center font-medium text-2xl'>
             👍 Login Success
           </h2>
+          
         ) : (
           <div className='w-80 flex flex-col gap-4  rounded-lg p-4'>
             <h1 className='flex justify-center items-center font-bold  text-4xl p-6 glow-text'

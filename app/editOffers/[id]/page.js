@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import * as Realm from "realm-web";
 import { usePathname, useRouter } from 'next/navigation';
 import Image from "next/image";
+import { bouncy } from 'ldrs';
+
 
 // Function to log in with email and password
 async function loginEmailPassword(email, password) {
@@ -15,39 +17,49 @@ async function loginEmailPassword(email, password) {
 
 const updateOffer = async (id, offer) => {
     try {
-      const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-      const res = await fetch(`https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/updateOne`, {
-        method: 'POST',
-        headers: {
-          'Access-Control-Request-Headers': '*',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + user.accessToken
-        },
-        cache: "no-cache",
-        body: JSON.stringify({
-          "collection": "offers",
-          "database": "offersDB",
-          "dataSource": "Cluster0",
-          "filter": { "_id": { "$oid": id } },
-          "update": { "$set": {
-            title: offer.title,
-            description: offer.description
-          } }
-        })
-      });
-      if (!res.ok) {
-        throw new Error("Failed to update offer");
-      }
-      return res.json();
+        const owner_id = localStorage.getItem("owner_id");
+        if(owner_id==null) {
+            return {};
+        }
+        const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+        const res = await fetch(`https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/updateOne`, {
+            method: 'POST',
+            headers: {
+                'Access-Control-Request-Headers': '*',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.accessToken
+            },
+            cache: "no-cache",
+            body: JSON.stringify({
+                "collection": "offers",
+                "database": "offersDB",
+                "dataSource": "Cluster0",
+                "filter": { "_id": { "$oid": id }, "owner_id": owner_id },
+                "update": {
+                    "$set": {
+                        title: offer.title,
+                        description: offer.description
+                    }
+                }
+            })
+        });
+        if (!res.ok) {
+            throw new Error("Failed to update offer");
+        }
+        return res.json();
     } catch (error) {
-      console.error("Error in updating offer", error);
-      return null;
+        console.error("Error in updating offer", error);
+        return null;
     }
-  };
+};
 
 // Function to get offer by ID
 const getOfferById = async (id) => {
     try {
+        const owner_id = localStorage.getItem("owner_id");
+        if(owner_id==null) {
+            return {};
+        }
         const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
         const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/findOne', {
             method: 'POST',
@@ -62,7 +74,8 @@ const getOfferById = async (id) => {
                 "database": "offersDB",
                 "dataSource": "Cluster0",
                 "filter": {
-                    "_id": { "$oid": id }
+                    "_id": { "$oid": id },
+                    "owner_id": owner_id
                 }
             })
         });
@@ -108,7 +121,15 @@ const EditOffer = () => {
 
 
     if (!offer) {
-        return <div>Loading...</div>;
+        return (
+
+            // Default values shown  
+            <l-bouncy
+                size="45"
+                speed="1.75"
+                color="black"
+            ></l-bouncy>
+        )
     }
 
     return (

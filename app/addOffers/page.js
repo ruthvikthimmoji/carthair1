@@ -19,6 +19,10 @@ const addOffers = async (title, description, isActive) => {
   }
 
   try {
+    const owner_id = localStorage.getItem("owner_id");
+    if (owner_id == null) {
+      return {};
+    }
     const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
     const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/insertOne', {
       method: 'POST',
@@ -35,7 +39,8 @@ const addOffers = async (title, description, isActive) => {
         "document": {
           "title": title,
           "description": description,
-          "isActive": isActive
+          "isActive": isActive,
+          "owner_id": owner_id
         }
       })
     });
@@ -43,7 +48,7 @@ const addOffers = async (title, description, isActive) => {
     if (!res.ok) {
       throw new Error("Failed to fetch Offers");
     }
-
+    alert("Offer added successfully!");
     return res.json();
   } catch (error) {
     console.error("Error in Loading", error);
@@ -66,8 +71,7 @@ export default function AddOffers() {
       setTitle("");
       setDescription("");
       setIsActive(true);
-      router.push('/pages/offers'); 
-      alert("Offer added successfully!");
+      router.push('/pages/offers');
     }
   };
 

@@ -33,6 +33,10 @@ export default function CustomersList() {
 
     const getCustomers = async () => {
         try {
+            const owner_id = localStorage.getItem("owner_id");
+            if(owner_id==null){
+                return {};
+            }
             const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
             const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/find', {
                 method: 'POST',
@@ -46,6 +50,7 @@ export default function CustomersList() {
                     "collection": "customers",
                     "database": "customersDB",
                     "dataSource": "Cluster0",
+                    "filter": {"owner_id": owner_id},
                     "projection": {}
                 })
             });
@@ -69,6 +74,10 @@ export default function CustomersList() {
 
     const removeCustomers = async (id) => {
         try {
+            const owner_id = localStorage.getItem("owner_id");
+            if(owner_id==null){
+                return {};
+            }
             const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
             const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/deleteOne', {
                 method: 'POST',
@@ -83,15 +92,17 @@ export default function CustomersList() {
                     "database": "customersDB",
                     "dataSource": "Cluster0",
                     "filter": {
-                        "_id": { "$oid": id }
+                        "_id": { "$oid": id },
+                        "owner_id": owner_id
                     }
                 })
             });
 
             if (res.ok) {
-                fetchCustomers()
+                fetchCustomers();
+                setExpandedCustomer(null);
             } else {
-                throw new Error("Failed to fetch Offers");
+                throw new Error("Failed to fetch Customers");
             }
         } catch (error) {
             console.error("Error in Deleting", error);

@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import * as Realm from "realm-web";
 import { usePathname, useRouter } from 'next/navigation';
 import Image from "next/image";
+import { bouncy } from 'ldrs'
 
+bouncy.register();
 
 async function loginEmailPassword(email, password) {
   const app = new Realm.App({ id: 'data-gacfoem' });
@@ -15,6 +17,10 @@ async function loginEmailPassword(email, password) {
 
 const updateCustomer = async (id, customer) => {
   try {
+    const owner_id = localStorage.getItem("owner_id");
+    if(owner_id==null){
+      return {};
+  }
     const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
     const res = await fetch(`https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/updateOne`, {
       method: 'POST',
@@ -28,7 +34,7 @@ const updateCustomer = async (id, customer) => {
         "collection": "customers",
         "database": "customersDB",
         "dataSource": "Cluster0",
-        "filter": { "_id": { "$oid": id } },
+        "filter": { "_id": { "$oid": id }, "owner_id": owner_id },
         "update": {
           "$set": {
             name: customer.name,
@@ -52,6 +58,10 @@ const updateCustomer = async (id, customer) => {
 
 const getCustomerById = async (id) => {
   try {
+    const owner_id = localStorage.getItem("owner_id");
+    if(owner_id==null){
+      return {};
+  }
     const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
     const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/findOne', {
       method: 'POST',
@@ -66,7 +76,8 @@ const getCustomerById = async (id) => {
         "database": "customersDB",
         "dataSource": "Cluster0",
         "filter": {
-          "_id": { "$oid": id }
+          "_id": { "$oid": id },
+          "owner_id": owner_id
         }
       })
     });
@@ -110,9 +121,13 @@ const EditCustomer = () => {
   };
 
   if (!customer) {
-    return <div>Loading....</div>
+    return (
+      <div className='min-w-full flex items-center justify-center min-h-[100vh]'>
+        <l-bouncy size="45" speed="1" color="white">
+        </l-bouncy>
+      </div>
+    )
   }
-
   return (
     <div className='flex flex-col lg:flex-row h-screen'>
       <div className='flex-1 relative'>

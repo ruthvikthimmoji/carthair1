@@ -30,6 +30,10 @@ export default function OffersList() {
 
   const getOffers = async () => {
     try {
+      const owner_id = localStorage.getItem("owner_id");
+      if (owner_id == null) {
+        return {};
+      }
       const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
       const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/find', {
         method: 'POST',
@@ -43,6 +47,7 @@ export default function OffersList() {
           "collection": "offers",
           "database": "offersDB",
           "dataSource": "Cluster0",
+          "filter": { "owner_id": owner_id },
           "projection": {}
         })
       });
@@ -67,6 +72,10 @@ export default function OffersList() {
   const removeOffers = async (id) => {
 
     try {
+      const owner_id = localStorage.getItem("owner_id");
+      if (owner_id == null) {
+        return {};
+      }
       const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
       const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/deleteOne', {
         method: 'POST',
@@ -81,7 +90,8 @@ export default function OffersList() {
           "database": "offersDB",
           "dataSource": "Cluster0",
           "filter": {
-            "_id": { "$oid": id }
+            "_id": { "$oid": id },
+            "owner_id": owner_id
           }
         })
       });

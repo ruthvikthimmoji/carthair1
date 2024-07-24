@@ -14,6 +14,7 @@ function NavbarAll() {
   }
 
   const handleLogout = () => {
+    localStorage.removeItem("owner_id");
     router.push("/");
   }
   return (
