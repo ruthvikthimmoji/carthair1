@@ -8,7 +8,7 @@ import { bouncy } from 'ldrs';
 
 // Function to log in with email and password
 async function loginEmailPassword(email, password) {
-    const app = new Realm.App({ id: process.env.MONGO_API_REALM_ID });
+    const app = new Realm.App({ id: 'data-gacfoem'});
     const credentials = Realm.Credentials.emailPassword(email, password);
     const user = await app.logIn(credentials);
     console.assert(user.id === app.currentUser.id);
