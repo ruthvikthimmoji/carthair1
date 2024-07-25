@@ -8,7 +8,7 @@ import { bouncy } from 'ldrs';
 
 // Function to log in with email and password
 async function loginEmailPassword(email, password) {
-    const app = new Realm.App({ id: 'data-gacfoem' });
+    const app = new Realm.App({ id: process.env.MONGO_API_REALM_ID });
     const credentials = Realm.Credentials.emailPassword(email, password);
     const user = await app.logIn(credentials);
     console.assert(user.id === app.currentUser.id);
@@ -17,12 +17,12 @@ async function loginEmailPassword(email, password) {
 
 const updateOffer = async (id, offer) => {
     try {
-        const owner_id = localStorage.getItem("owner_id");
+        const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
         if(owner_id==null) {
             return {};
         }
-        const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-        const res = await fetch(`https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/updateOne`, {
+        const user = await loginEmailPassword(process.env.MONGO_USER_EMAIL, process.env.MONGO_USER_PASSWORD);
+        const res = await fetch(process.env.MONGO_API_ENDPOINT + '/updateOne', {
             method: 'POST',
             headers: {
                 'Access-Control-Request-Headers': '*',
@@ -56,12 +56,12 @@ const updateOffer = async (id, offer) => {
 // Function to get offer by ID
 const getOfferById = async (id) => {
     try {
-        const owner_id = localStorage.getItem("owner_id");
+        const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
         if(owner_id==null) {
             return {};
         }
-        const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-        const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/findOne', {
+        const user = await loginEmailPassword(process.env.MONGO_USER_EMAIL, process.env.MONGO_USER_PASSWORD);
+        const res = await fetch(process.env.MONGO_API_ENDPOINT + '/findOne', {
             method: 'POST',
             headers: {
                 'Access-Control-Request-Headers': '*',

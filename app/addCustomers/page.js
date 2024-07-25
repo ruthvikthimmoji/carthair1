@@ -5,7 +5,7 @@ import Image from 'next/image';
 import * as Realm from "realm-web";
 
 const loginEmailPassword = async (email, password) => {
-  const app = new Realm.App({ id: 'data-gacfoem' });
+  const app = new Realm.App({ id: process.env.MONGO_API_REALM_ID });
   const credentials = Realm.Credentials.emailPassword(email, password);
   const user = await app.logIn(credentials);
   console.assert(user.id === app.currentUser.id);
@@ -19,13 +19,13 @@ const addCustomers = async (name, phonenumber, date, attendant, services) => {
   }
 
   try {
-    const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+    const user = await loginEmailPassword(process.env.MONGO_USER_EMAIL, process.env.MONGO_USER_PASSWORD);
 
     const owner_id=localStorage.getItem('owner_id');
     if(owner_id==null){
       return {};
   }
-    const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action/insertOne', {
+    const res = await fetch(process.env.MONGO_API_ENDPOINT + '/insertOne', {
       method: 'POST',
       headers: {
         'Access-Control-Request-Headers': '*',

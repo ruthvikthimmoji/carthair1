@@ -7,9 +7,6 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-
-
-
 export default function LoginPage() {
   const [otp, setOtp] = useState('');
   const [ph, setPh] = useState('');
@@ -26,7 +23,6 @@ export default function LoginPage() {
     setOtp(e.target.value)
   }
 
-
   function onCaptchVerify() {
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
@@ -36,7 +32,6 @@ export default function LoginPage() {
         },
         'expired-callback': () => { },
       });
-
     }
   }
 
@@ -44,8 +39,6 @@ export default function LoginPage() {
     setLoading(true)
     onCaptchVerify()
     const appVerifier = window.recaptchaVerifier
-
-
     const formatPh = '+' + ph
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
@@ -62,9 +55,8 @@ export default function LoginPage() {
   function onOTPVerify() {
     setLoading(true)
     window.confirmationResult.confirm(otp).then(async (res) => {
-      console.log(res);
       setUser(res.user);
-      localStorage.setItem('owner_id', res._tokenResponse.localId)
+      localStorage.setItem('CARTHAIR_LOGGED_USER_ID', res._tokenResponse.localId)
       setLoading(false);
       router.push('/home')
     }).catch(err => {
@@ -73,11 +65,7 @@ export default function LoginPage() {
     })
   }
 
-
-
-
   return (
-
     <section className='bg-grey-400 flex flex-col lg:flex-row items-center justify-center h-screen'>
       <div className='flex-1 flex flex-col items-center justify-center p-4 lg:p-10'>
         <div id='recaptcha-container'></div>
@@ -85,7 +73,6 @@ export default function LoginPage() {
           <h2 className='text-center font-medium text-2xl'>
             👍 Login Success
           </h2>
-          
         ) : (
           <div className='w-80 flex flex-col gap-4  rounded-lg p-4'>
             <h1 className='flex justify-center items-center font-bold  text-4xl p-6 glow-text'
@@ -101,13 +88,13 @@ export default function LoginPage() {
                     Enter Your OTP
                   </label>
                   <input
-                  type='otp' 
-                  value={otp}
-                  onChange={handleChangeOtp}
-                  className='bg-transparent border py-2 pl-4 border-orange-600 rounded-full'>
+                    type='otp'
+                    value={otp}
+                    onChange={handleChangeOtp}
+                    className='bg-transparent border py-2 pl-4 border-orange-600 rounded-full'>
                   </input>
                   <button onClick={onOTPVerify}
-                  className='bg-orange-600 text-gray-800 hover:border hover:bg-transparent  hover:text-orange-600 border border-orange-600 w-full flex gap-1 items-center justify-center py-2.5 rounded-full'>
+                    className='bg-orange-600 text-gray-800 hover:border hover:bg-transparent  hover:text-orange-600 border border-orange-600 w-full flex gap-1 items-center justify-center py-2.5 rounded-full'>
                     {loading && <HiSparkles size={30} className='mt-1 animate-pulse' />
                     }
                     <span>Verify OTP</span>
@@ -119,15 +106,15 @@ export default function LoginPage() {
                   </div>
                   <label htmlFor=''
                     className='font-thin  text-2xl text-center'>
-                    Enter Your<br/> Phone Number
+                    Enter Your<br /> Phone Number
                   </label>
-                  <input 
-                  type='tel' 
-                  value={ph} 
-                  onChange={handleChangePh} 
-                  className='bg-transparent border py-2 pl-4 border-orange-600 rounded-full'/>
-                  <button onClick={onSignup} 
-                  className='bg-orange-600 text-gray-800 hover:border hover:bg-transparent  hover:text-orange-600 border border-orange-600 w-full flex gap-1 items-center justify-center py-2.5 rounded-full'>
+                  <input
+                    type='tel'
+                    value={ph}
+                    onChange={handleChangePh}
+                    className='bg-transparent border py-2 pl-4 border-orange-600 rounded-full' />
+                  <button onClick={onSignup}
+                    className='bg-orange-600 text-gray-800 hover:border hover:bg-transparent  hover:text-orange-600 border border-orange-600 w-full flex gap-1 items-center justify-center py-2.5 rounded-full'>
                     {loading && <HiSparkles size={30} className='mt-1 animate-pulse' />
                     }
                     <span>Send OTP</span>
@@ -136,7 +123,6 @@ export default function LoginPage() {
               )}
           </div>
         )}
-
       </div>
       <div className='flex-1 relative'>
         <Image
@@ -148,8 +134,5 @@ export default function LoginPage() {
         />
       </div>
     </section>
-   
-
-    
   )
 }
