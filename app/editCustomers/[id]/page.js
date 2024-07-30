@@ -39,6 +39,7 @@ const updateCustomer = async (id, customer) => {
           "$set": {
             name: customer.name,
             phonenumber: customer.phonenumber,
+            email: customer.email,
             date: customer.date,
             services: customer.services,
             attendant: customer.attendant
@@ -159,6 +160,14 @@ const EditCustomer = () => {
             <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
               onChange={(e) => setCustomer({ ...customer, phonenumber: e.target.value })} value={customer.phonenumber}
               type="tel" id="phone" name="phone" />
+          </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2' >
+              Email
+            </label>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+              onChange={(e) => setCustomer({ ...customer, email: e.target.value })} value={customer.email}
+              type="mail" id="email" name="email" />
           </div>
           <div className='mb-6'>
             <label className='block text-orange-200 text-sm mb-2'>

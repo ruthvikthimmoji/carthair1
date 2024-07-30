@@ -12,8 +12,8 @@ const loginEmailPassword = async (email, password) => {
   return user;
 };
 
-const addCustomers = async (name, phonenumber, date, attendant, services) => {
-  if (!name || !phonenumber || !date || !attendant || !services) {
+const addCustomers = async (name, phonenumber,email, date, attendant, services) => {
+  if (!name || !phonenumber|| !email || !date || !attendant || !services) {
     alert("All fields are required.");
     return null;
   }
@@ -40,6 +40,7 @@ const addCustomers = async (name, phonenumber, date, attendant, services) => {
         "document": {
           "name": name,
           "phonenumber": phonenumber,
+          "email": email,
           "date": date,
           "attendant": attendant,
           "services": services,
@@ -62,6 +63,7 @@ const addCustomers = async (name, phonenumber, date, attendant, services) => {
 export default function AddCustomers() {
   const [name, setName] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
+  const [email, setEmail] = useState('');
   const [date, setDate] = useState('');
   const [attendant, setAttendant] = useState('');
   const [services, setServices] = useState('');
@@ -71,11 +73,12 @@ export default function AddCustomers() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await addCustomers(name, phonenumber, date, attendant, services);
+    const result = await addCustomers(name, phonenumber, email, date, attendant, services);
     if (result) {
       setCustomers([...customers, result]);
       setName('');
       setPhonenumber('');
+      setEmail('');
       setDate('');
       setAttendant('');
       setServices('');
@@ -116,6 +119,17 @@ export default function AddCustomers() {
               type="tel"
               id="phone"
               name="phone"
+            />
+          </div>
+          <div className='mb-6'>
+            <label className='block text-orange-200 text-sm mb-2'>Email</label>
+            <input
+              className='shadow appearance-none border rounded w-full py-2 px-3 text-orange-400 mb-3 leading-tight bg-transparent border-orange-400 focus:outline-none focus:shadow-outline'
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              type="mail"
+              id="mail"
+              name="email"
             />
           </div>
           <div className='mb-6'>

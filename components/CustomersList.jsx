@@ -123,6 +123,7 @@ export default function CustomersList() {
                         <tr>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Name</th>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Phone Number</th>
+                            <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Email</th>
                             <th className="px-2 py-2 border rounded-md border-orange-400 text-left">Date</th>
                         </tr>
                     </thead>
@@ -132,6 +133,7 @@ export default function CustomersList() {
                                 <tr className="cursor-pointer" onClick={() => toggleCustomer(index)}>
                                     <td className='border-r p-1'>{customer.name}</td>
                                     <td className='border-r p-1'>{customer.phonenumber}</td>
+                                    <td className='border-r p-1'>{customer.email}</td>
                                     <td className='border-r p-1 flex flex-row justify-between'>
                                         <span>
                                             {customer.date}
