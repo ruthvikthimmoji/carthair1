@@ -5,7 +5,7 @@ import Image from 'next/image';
 import * as Realm from "realm-web";
 
 const loginEmailPassword = async (email, password) => {
-  const app = new Realm.App({ id: 'data-gacfoem'});
+  const app = new Realm.App({ id: process.env.MONGO_API_REALM_ID});
   const credentials = Realm.Credentials.emailPassword(email, password);
   const user = await app.logIn(credentials);
   console.assert(user.id === app.currentUser.id);
