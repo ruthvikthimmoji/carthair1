@@ -8,7 +8,7 @@ import { bouncy } from 'ldrs';
 
 // Function to log in with email and password
 async function loginEmailPassword(email, password) {
-    const app = new Realm.App({ id: process.env.MONGO_API_REALM_ID});
+    const app = new Realm.App({ id: 'data-gacfoem'});
     const credentials = Realm.Credentials.emailPassword(email, password);
     const user = await app.logIn(credentials);
     console.assert(user.id === app.currentUser.id);
@@ -21,8 +21,8 @@ const updateOffer = async (id, offer) => {
         if(owner_id==null) {
             return {};
         }
-        const user = await loginEmailPassword(process.env.MONGO_USER_EMAIL, process.env.MONGO_USER_PASSWORD);
-        const res = await fetch(process.env.MONGO_API_ENDPOINT + '/updateOne', {
+        const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+        const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/updateOne', {
             method: 'POST',
             headers: {
                 'Access-Control-Request-Headers': '*',
@@ -60,8 +60,8 @@ const getOfferById = async (id) => {
         if(owner_id==null) {
             return {};
         }
-        const user = await loginEmailPassword(process.env.MONGO_USER_EMAIL, process.env.MONGO_USER_PASSWORD);
-        const res = await fetch(process.env.MONGO_API_ENDPOINT + '/findOne', {
+        const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+        const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/findOne', {
             method: 'POST',
             headers: {
                 'Access-Control-Request-Headers': '*',
