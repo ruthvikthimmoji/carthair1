@@ -5,11 +5,13 @@ import NavbarAll from "./NavbarAll";
 import Link from 'next/link';
 import { HiTrash, HiPencil } from 'react-icons/hi';
 import * as Realm from "realm-web";
+import { useRouter } from 'next/navigation';
 
 
 export default function OffersList() {
   const [offers, setOffers] = useState([]);
   const [expandedOffer, setExpandedOffer] = useState(null);
+  const router = useRouter();
 
   const fetchOffers = async () => {
     const { documents } = await getOffers();
@@ -17,6 +19,10 @@ export default function OffersList() {
   };
 
   useEffect(() => {
+    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+    if (owner_id == null) {
+      router.replace("/");
+    }
     fetchOffers();
   }, []);
 
@@ -32,7 +38,7 @@ export default function OffersList() {
     try {
       const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
       if (owner_id == null) {
-        return {};
+        router.replace("/");
       }
       const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
       const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/find', {
@@ -62,7 +68,7 @@ export default function OffersList() {
   };
 
   async function loginEmailPassword(email, password) {
-    const app = new Realm.App({ id: 'data-gacfoem'});
+    const app = new Realm.App({ id: 'data-gacfoem' });
     const credentials = Realm.Credentials.emailPassword(email, password);
     const user = await app.logIn(credentials);
     console.assert(user.id === app.currentUser.id);
@@ -74,7 +80,7 @@ export default function OffersList() {
     try {
       const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
       if (owner_id == null) {
-        return {};
+        router.replace("/");
       }
       const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
       const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/deleteOne', {

@@ -39,16 +39,15 @@ export default function LoginPage() {
     setLoading(true)
     onCaptchVerify()
     const appVerifier = window.recaptchaVerifier
-    const formatPh = '+' + ph
-    signInWithPhoneNumber(auth, formatPh, appVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
-        setLoading(false);
-        setShowOtp(true);
-      }).catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    const formatPh = ph
+    signInWithPhoneNumber(auth, formatPh, appVerifier).then((confirmationResult) => {
+      window.confirmationResult = confirmationResult;
+      setLoading(false);
+      setShowOtp(true);
+    }).catch((error) => {
+      console.log(error);
+      setLoading(false);
+    });
 
   }
 

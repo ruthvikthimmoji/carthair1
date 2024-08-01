@@ -3,19 +3,18 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { FiLogOut } from "react-icons/fi";
 import { TiArrowBackOutline } from "react-icons/ti";
-import Link from 'next/link';
 
 
 function NavbarAll() {
   const router = useRouter();
 
   const handleBack = () =>{
-    router.back('./')
+    router.back();
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("owner_id");
-    router.push("/");
+    localStorage.removeItem("CARTHAIR_LOGGED_USER_ID");
+    router.replace("/");
   }
   return (
     <div className='p-4 lg:p-6 shadow-[0_0_5px_0] backdrop-blur-10 bg-orange-200/10 border-b-2 border-orange-200'>

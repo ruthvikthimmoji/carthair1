@@ -8,92 +8,11 @@ import { bouncy } from 'ldrs'
 bouncy.register();
 
 async function loginEmailPassword(email, password) {
-  const app = new Realm.App({ id: 'data-gacfoem'});
+  const app = new Realm.App({ id: 'data-gacfoem' });
   const credentials = Realm.Credentials.emailPassword(email, password);
   const user = await app.logIn(credentials);
   console.assert(user.id === app.currentUser.id);
   return user;
-}
-
-const updateCustomer = async (id, customer) => {
-  try {
-    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
-    if(owner_id==null){
-      return {};
-  }
-    const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-    const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/updateOne', {
-      method: 'POST',
-      headers: {
-        'Access-Control-Request-Headers': '*',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + user.accessToken
-      },
-      cache: "no-cache",
-      body: JSON.stringify({
-        "collection": "customers",
-        "database": "customersDB",
-        "dataSource": "Cluster0",
-        "filter": { "_id": { "$oid": id }, "owner_id": owner_id },
-        "update": {
-          "$set": {
-            name: customer.name,
-            phonenumber: customer.phonenumber,
-            email: customer.email,
-            date: customer.date,
-            services: customer.services,
-            attendant: customer.attendant
-          }
-        }
-      })
-    });
-    if (!res.ok) {
-      throw new Error("Failed to Upadate Customer");
-    }
-    return res.json();
-  } catch (error) {
-    console.error("enter in Updating customer", error);
-    return null;
-  }
-};
-
-const getCustomerById = async (id) => {
-  try {
-    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
-    if(owner_id==null){
-      return {};
-  }
-    const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-    const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/findOne', {
-      method: 'POST',
-      headers: {
-        'Access-Control-Request-Headers': '*',
-        'Content-Type': 'application/ejson',
-        'Authorization': 'Bearer ' + user.accessToken
-      },
-      cache: "no-cache",
-      body: JSON.stringify({
-        "collection": "customers",
-        "database": "customersDB",
-        "dataSource": "Cluster0",
-        "filter": {
-          "_id": { "$oid": id },
-          "owner_id": owner_id
-        }
-      })
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      return data.document;
-    } else {
-      console.log("Failed to fetch Offers");
-      return {};
-    }
-  } catch (error) {
-    console.log("Error in fetching", error);
-    return {};
-  }
 }
 
 const EditCustomer = () => {
@@ -107,19 +26,104 @@ const EditCustomer = () => {
     setCustomer(fetchedCustomer);
   };
   useEffect(() => {
+    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+    if (owner_id == null) {
+      router.replace("/");
+    }
     fetchData();
-  }, []);
+  }, [router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await updateCustomer(id, customer);
     if (result) {
-      alert("Custer updated Successfully!");
+      alert("Customer updated Successfully!");
       router.push("/pages/customers");
     } else {
       alert("failed to update Customer");
     }
   };
+
+  const updateCustomer = async (id, customer) => {
+    try {
+      const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+      if (owner_id == null) {
+        router.replace("/");
+      }
+      const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+      const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/updateOne', {
+        method: 'POST',
+        headers: {
+          'Access-Control-Request-Headers': '*',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + user.accessToken
+        },
+        cache: "no-cache",
+        body: JSON.stringify({
+          "collection": "customers",
+          "database": "customersDB",
+          "dataSource": "Cluster0",
+          "filter": { "_id": { "$oid": id }, "owner_id": owner_id },
+          "update": {
+            "$set": {
+              name: customer.name,
+              phonenumber: customer.phonenumber,
+              email: customer.email,
+              date: customer.date,
+              services: customer.services,
+              attendant: customer.attendant
+            }
+          }
+        })
+      });
+      if (!res.ok) {
+        throw new Error("Failed to Upadate Customer");
+      }
+      return res.json();
+    } catch (error) {
+      console.error("enter in Updating customer", error);
+      return null;
+    }
+  };
+
+  const getCustomerById = async (id) => {
+    try {
+      const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+      if (owner_id == null) {
+        router.replace("/");
+      }
+      const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+      const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/findOne', {
+        method: 'POST',
+        headers: {
+          'Access-Control-Request-Headers': '*',
+          'Content-Type': 'application/ejson',
+          'Authorization': 'Bearer ' + user.accessToken
+        },
+        cache: "no-cache",
+        body: JSON.stringify({
+          "collection": "customers",
+          "database": "customersDB",
+          "dataSource": "Cluster0",
+          "filter": {
+            "_id": { "$oid": id },
+            "owner_id": owner_id
+          }
+        })
+      });
+  
+      if (res.ok) {
+        const data = await res.json();
+        return data.document;
+      } else {
+        console.log("Failed to fetch Offers");
+        return {};
+      }
+    } catch (error) {
+      console.log("Error in fetching", error);
+      return {};
+    }
+  }
 
   if (!customer) {
     return (

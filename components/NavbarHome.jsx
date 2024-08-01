@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { FiLogOut } from "react-icons/fi";
 import Link from 'next/link';
@@ -7,6 +7,14 @@ import Link from 'next/link';
 
 function NavbarHome() {
   const router = useRouter();
+
+  useEffect(() => {
+    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+    if (owner_id == null) {
+      router.replace("/");
+    }
+  }, [router]);
+
 
   const handleLogout = () => {
     router.push("/");

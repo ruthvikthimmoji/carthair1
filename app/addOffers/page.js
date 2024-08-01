@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as Realm from "realm-web";
@@ -12,56 +12,19 @@ const loginEmailPassword = async (email, password) => {
   return user;
 };
 
-const addOffers = async (title, description, isActive) => {
-  if (!title || !description || isActive === undefined) {
-    alert("Required fields are missing");
-    return;
-  }
-
-  try {
-    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
-    if (owner_id == null) {
-      return {};
-    }
-    const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-    const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/insertOne', {
-      method: 'POST',
-      headers: {
-        'Access-Control-Request-Headers': '*',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + user.accessToken
-      },
-      cache: "no-cache",
-      body: JSON.stringify({
-        "collection": "offers",
-        "database": "offersDB",
-        "dataSource": "Cluster0",
-        "document": {
-          "title": title,
-          "description": description,
-          "isActive": isActive,
-          "owner_id": owner_id
-        }
-      })
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch Offers");
-    }
-    alert("Offer added successfully!");
-    return res.json();
-  } catch (error) {
-    console.error("Error in Loading", error);
-    return { offers: [] };
-  }
-};
-
 export default function AddOffers() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [offers, setOffers] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+    if (owner_id == null) {
+      router.replace("/");
+    }
+  }, [router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,6 +35,50 @@ export default function AddOffers() {
       setDescription("");
       setIsActive(true);
       router.push('/pages/offers');
+    }
+  };
+
+  const addOffers = async (title, description, isActive) => {
+    if (!title || !description || isActive === undefined) {
+      alert("Required fields are missing");
+      return;
+    }
+  
+    try {
+      const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+      if (owner_id == null) {
+        router.replace("/");
+      }
+      const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+      const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/insertOne', {
+        method: 'POST',
+        headers: {
+          'Access-Control-Request-Headers': '*',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + user.accessToken
+        },
+        cache: "no-cache",
+        body: JSON.stringify({
+          "collection": "offers",
+          "database": "offersDB",
+          "dataSource": "Cluster0",
+          "document": {
+            "title": title,
+            "description": description,
+            "isActive": isActive,
+            "owner_id": owner_id
+          }
+        })
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to fetch Offers");
+      }
+      alert("Offer added successfully!");
+      return res.json();
+    } catch (error) {
+      console.error("Error in Loading", error);
+      return { offers: [] };
     }
   };
 

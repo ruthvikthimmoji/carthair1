@@ -1,63 +1,15 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import * as Realm from "realm-web";
 
 const loginEmailPassword = async (email, password) => {
-  const app = new Realm.App({ id: 'data-gacfoem'});
+  const app = new Realm.App({ id: 'data-gacfoem' });
   const credentials = Realm.Credentials.emailPassword(email, password);
   const user = await app.logIn(credentials);
   console.assert(user.id === app.currentUser.id);
   return user;
-};
-
-const addCustomers = async (name, phonenumber,email, date, attendant, services) => {
-  if (!name || !phonenumber|| !email || !date || !attendant || !services) {
-    alert("All fields are required.");
-    return null;
-  }
-
-  try {
-    const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
-
-    const owner_id=localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
-    if(owner_id==null){
-      return {};
-  }
-    const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/insertOne', {
-      method: 'POST',
-      headers: {
-        'Access-Control-Request-Headers': '*',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + user.accessToken
-      },
-      cache: "no-cache",
-      body: JSON.stringify({
-        "collection": "customers",
-        "database": "customersDB",
-        "dataSource": "Cluster0",
-        "document": {
-          "name": name,
-          "phonenumber": phonenumber,
-          "email": email,
-          "date": date,
-          "attendant": attendant,
-          "services": services,
-          "owner_id": owner_id
-        }
-      })
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to add customer");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error("Error in adding customer", error);
-    return null;
-  }
 };
 
 export default function AddCustomers() {
@@ -70,6 +22,13 @@ export default function AddCustomers() {
   const [customers, setCustomers] = useState([]);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+    if (owner_id == null) {
+      router.replace("/");
+    }
+  }, [router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,6 +43,54 @@ export default function AddCustomers() {
       setServices('');
       router.push('/pages/customers');
       alert('Customer added successfully!');
+    }
+  };
+
+  const addCustomers = async (name, phonenumber, email, date, attendant, services) => {
+    if (!name || !phonenumber || !email || !date || !attendant || !services) {
+      alert("All fields are required.");
+      return null;
+    }
+
+    try {
+      const user = await loginEmailPassword('ruthvik@gmail.com', 'OxfMiQLGIXyKATl');
+
+      const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+      if (owner_id == null) {
+        router.replace("/");
+      }
+      const res = await fetch('https://ap-south-1.aws.data.mongodb-api.com/app/data-gacfoem/endpoint/data/v1/action' + '/insertOne', {
+        method: 'POST',
+        headers: {
+          'Access-Control-Request-Headers': '*',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + user.accessToken
+        },
+        cache: "no-cache",
+        body: JSON.stringify({
+          "collection": "customers",
+          "database": "customersDB",
+          "dataSource": "Cluster0",
+          "document": {
+            "name": name,
+            "phonenumber": phonenumber,
+            "email": email,
+            "date": date,
+            "attendant": attendant,
+            "services": services,
+            "owner_id": owner_id
+          }
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to add customer");
+      }
+
+      return res.json();
+    } catch (error) {
+      console.error("Error in adding customer", error);
+      return null;
     }
   };
 
