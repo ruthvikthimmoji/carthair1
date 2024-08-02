@@ -17,7 +17,7 @@ function NavbarHome() {
 
 
   const handleLogout = () => {
-    router.push("/");
+    router.replace("/");
   }
   return (
     <div className='p-4 md:p-6 relative shadow-[0_0_5px_0] backdrop-blur-10 bg-orange-200/10 border-b-2  border-orange-200'>
@@ -26,7 +26,7 @@ function NavbarHome() {
         <div>
           <ul className='flex flex-col md:flex-row md:gap-24 justify-center items-center'>
             <li className='hover:text-orange-400 mb-4 md:mb-0'>
-              <Link href='#'>
+              <Link href='/home'>
                 Home
               </Link>
             </li>

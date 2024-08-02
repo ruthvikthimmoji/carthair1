@@ -1,5 +1,5 @@
 "use client";
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -12,14 +12,19 @@ import { useRouter } from 'next/navigation';
 const actions = [
   { icon: <FaUsers />, name: 'Add Customers', path: "/addCustomers" },
   { icon: <RiCoupon3Line />, name: 'Add Users', path: "/addOffers" },
-
 ];
 
 export default function ExpandableFABtn() {
   const router = useRouter('');
+  useEffect(() => {
+    const owner_id = localStorage.getItem("CARTHAIR_LOGGED_USER_ID");
+    if (owner_id == null) {
+      router.replace("/");
+    }
+  }, [router]);
+
   const handleClick = async (path) => {
     router.push(path);
-    router.refresh();
   }
 
   return (

@@ -40,7 +40,7 @@ const EditOffer = () => {
     const result = await updateOffer(id, offer);
     if (result) {
       alert("Offer updated successfully!");
-      router.push("/pages/offers");
+      router.back();
     } else {
       alert("Failed to update offer");
     }

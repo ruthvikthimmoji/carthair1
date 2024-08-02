@@ -38,7 +38,7 @@ const EditCustomer = () => {
     const result = await updateCustomer(id, customer);
     if (result) {
       alert("Customer updated Successfully!");
-      router.push("/pages/customers");
+      router.back();
     } else {
       alert("failed to update Customer");
     }

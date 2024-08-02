@@ -41,7 +41,7 @@ export default function AddCustomers() {
       setDate('');
       setAttendant('');
       setServices('');
-      router.push('/pages/customers');
+      router.refresh();
       alert('Customer added successfully!');
     }
   };

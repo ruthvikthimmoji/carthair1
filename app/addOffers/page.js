@@ -34,7 +34,7 @@ export default function AddOffers() {
       setTitle("");
       setDescription("");
       setIsActive(true);
-      router.push('/pages/offers');
+      router.refresh();
     }
   };
 
